@@ -21,11 +21,11 @@ We'll share dates and a first look here as soon as we can.
 
 OCG+ has been rebuilt around loot. Pick one of three tiers and get a drop every month, on every OCG server:
 
-- **OCG+ I**: $10 a month
-- **OCG+ II**: $20 a month
-- **OCG+ III**: $30 a month
+- **Charged**: $5 a month
+- **Overcharged**: $10 a month
+- **Supercharged**: $20 a month
 
-Every drop includes crate keys, Credits and that month's cosmetic. Higher tiers get more of everything, plus extras like plushies. See exactly what each tier gets at <https://minecraft.ocgames.xyz/plus.html>
+Every drop includes Credits and a crate key, plus a bolt by your name in chat. Higher tiers get bigger keys and more Credits, plus extras like plushies, double vote keys and /fly in your claims. See exactly what each tier gets at <https://minecraft.ocgames.xyz/plus.html>
 
 Perks like extra homes and commands now come from **network ranks**. Ranks are permanent, work on every server, and stack with OCG+.
 

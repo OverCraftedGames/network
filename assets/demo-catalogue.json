@@ -17,7 +17,7 @@
       "packages": [
         {
           "id": 9100001,
-          "name": "OCG+ I",
+          "name": "OCG+ Charged",
           "description": "<p>Placeholder description. Contents are listed on the OCG+ page.</p>",
           "image": "assets/icons/plus-1.svg",
           "type": "subscription",
@@ -25,9 +25,9 @@
             "id": 9000001,
             "name": "OCG+"
           },
-          "base_price": 10,
+          "base_price": 5,
           "sales_tax": 0,
-          "total_price": 10,
+          "total_price": 5,
           "currency": "USD",
           "discount": 0,
           "disable_quantity": true,
@@ -40,7 +40,7 @@
         },
         {
           "id": 9100002,
-          "name": "OCG+ II",
+          "name": "OCG+ Overcharged",
           "description": "<p>Placeholder description. Contents are listed on the OCG+ page.</p>",
           "image": "assets/icons/plus-2.svg",
           "type": "subscription",
@@ -48,9 +48,9 @@
             "id": 9000001,
             "name": "OCG+"
           },
-          "base_price": 20,
+          "base_price": 10,
           "sales_tax": 0,
-          "total_price": 20,
+          "total_price": 10,
           "currency": "USD",
           "discount": 0,
           "disable_quantity": true,
@@ -63,7 +63,7 @@
         },
         {
           "id": 9100003,
-          "name": "OCG+ III",
+          "name": "OCG+ Supercharged",
           "description": "<p>Placeholder description. Contents are listed on the OCG+ page.</p>",
           "image": "assets/icons/plus-3.svg",
           "type": "subscription",
@@ -71,9 +71,9 @@
             "id": 9000001,
             "name": "OCG+"
           },
-          "base_price": 30,
+          "base_price": 20,
           "sales_tax": 0,
-          "total_price": 30,
+          "total_price": 20,
           "currency": "USD",
           "discount": 0,
           "disable_quantity": true,

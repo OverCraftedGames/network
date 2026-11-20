@@ -89,11 +89,11 @@ turns checkout off. `?live` forces live mode while testing; `?demo` forces previ
 
 1. **Restructure the Tebex catalogue.** *Built on 2026-11-20 and kept **disabled**, so the
    live store is unchanged.* The categories `ocg-plus`, `ranks` and `credits` exist in the
-   Tebex panel, each with "Disable this category" turned on. Prices are placeholders:
+   Tebex panel, each with "Disable this category" turned on. Rank prices are placeholders:
 
    | Category | Packages | Commands (CarbonCraft server) |
    |---|---|---|
-   | OCG+ (30-day subscriptions) | OCG+ I $10, II $20, III $30 | On purchase and renewal: `lp user {username} parent addtemp ocgplusN 30d` and `cmi usermeta {username} increment carboncoins 500/1200/2000` |
+   | OCG+ (30-day subscriptions) | OCG+ Charged $5, Overcharged $10, Supercharged $20 | On purchase and renewal: `lp user {username} parent addtemp ocgplusN 30d`, `cmi usermeta {username} increment carboncoins 175/425/850` and `ecrates key give {username} carbon_key/plasma_key/iridium_key 1` |
    | Ranks (one-off) | Copper $10, Iron $25, Gold $50, Diamond $100, Emerald $150 | Purchase: `lp user {username} parent add <rank>`. Refund and chargeback: `parent remove <rank>` |
    | Credits (one-off) | The five CarbonCoins packs, renamed, same prices | `cmi usermeta {username} increment carboncoins <amount>` (same key, so balances carry over) |
 

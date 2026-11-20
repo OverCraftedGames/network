@@ -29,39 +29,43 @@ window.NETWORK = {
     }
   ],
 
-  // OCG+ monthly tiers, cheapest first. PLACEHOLDER names and contents.
+  // OCG+ monthly tiers, cheapest first ($5 / $10 / $20).
+  // Credits + keys are worth about half of a Credits pack at the same price (keys counted at
+  // their coin-shop price: Carbon 75, Plasma 125, Iridium 350). More perks get added over time.
+  // Badge: one bolt by the name in chat and tab, coloured by tier (yellow / gold / pink).
   plus: [
     {
-      name: "OCG+ I",
-      tagline: "The monthly drop",
+      name: "Charged",
+      tagline: "A monthly top-up",
       items: [
-        ["coin", "<b>500 Credits</b> every month"],
-        ["key", "<b>2 crate keys</b> on every server"],
-        ["gem", "This month's <b>cosmetic</b>"],
-        ["discord", "OCG+ role in Discord"]
+        ["coin", "<b>175 Credits</b> every month"],
+        ["key", "<b>1 Carbon key</b> every month"],
+        ["gem", "A <b>yellow bolt</b> by your name in chat and tab"]
       ]
     },
     {
-      name: "OCG+ II",
-      tagline: "More of everything",
+      name: "Overcharged",
+      tagline: "More loot, more perks",
       featured: true,
       items: [
-        ["coin", "<b>1,200 Credits</b> every month"],
-        ["key", "<b>5 crate keys</b> on every server"],
-        ["gem", "This month's <b>cosmetic</b> + a bonus cosmetic"],
-        ["gift", "A <b>monthly plushie</b>"],
-        ["discord", "OCG+ role in Discord"]
+        ["coin", "<b>425 Credits</b> every month"],
+        ["key", "<b>1 Plasma key</b> every month"],
+        ["plush", "A <b>random plushie</b> every month"],
+        ["vote", "<b>Double vote keys</b>"],
+        ["gem", "A <b>gold bolt</b> by your name in chat and tab"]
       ]
     },
     {
-      name: "OCG+ III",
+      name: "Supercharged",
       tagline: "The full haul",
       items: [
-        ["coin", "<b>2,000 Credits</b> every month"],
-        ["key", "<b>8 crate keys</b> + 1 rare key on every server"],
-        ["gem", "Every monthly cosmetic, plus a <b>III-only</b> one"],
-        ["gift", "<b>2 monthly plushies</b>"],
-        ["discord", "OCG+ III role in Discord"]
+        ["coin", "<b>850 Credits</b> every month"],
+        ["key", "<b>1 Iridium key</b> every month"],
+        ["plush", "A <b>random plushie</b> every month"],
+        ["vote", "<b>Double vote keys</b>"],
+        ["crown", "That month's <b>exclusive tag</b>, yours to keep"],
+        ["check", "<b>/fly</b> in your own claims"],
+        ["gem", "A <b>pink bolt</b> by your name in chat and tab"]
       ]
     }
   ],
@@ -88,22 +92,24 @@ window.NETWORK = {
           ["Coloured chat", [false, true, true, true, true]]
         ]}
       ],
+      // Emerald must cover everything Carbon+ Lifetime gave (Lifetime holders move to it).
       survival: [
         { title: "Limits", perks: [
-          ["Homes", ["5", "8", "12", "20", "30"]],
-          ["Player warps", ["1", "2", "3", "5", "8"]],
-          ["Bonus claim blocks", ["+2,000", "+5,000", "+10,000", "+20,000", "+35,000"]],
-          ["Auction listings", ["8", "12", "18", "25", "35"]]
+          ["Homes", ["5", "8", "10", "15", "20"]],
+          ["Auction listings", ["10", "15", "20", "30", "40"]],
+          ["Player warps", ["2", "3", "5", "8", "12"]],
+          ["Claim blocks (once, on purchase)", ["+2,000", "+5,000", "+10,000", "+20,000", "+35,000"]]
         ]},
         { title: "Commands", perks: [
-          ["/hat", [true, true, true, true, true]],
-          ["/craft and /enderchest", [false, true, true, true, true]],
+          ["/hat and /workbench", [true, true, true, true, true]],
+          ["/enderchest", [false, true, true, true, true]],
           ["/nick", [false, false, true, true, true]],
-          ["/back after death", [false, false, true, true, true]],
+          ["/heads", [false, false, true, true, true]],
+          ["/back", [false, false, true, true, true]],
           ["/fly in your own claims", [false, false, false, true, true]]
         ]},
         { title: "Extras", perks: [
-          ["Rank kit (weekly)", [false, false, true, true, true]]
+          ["Double vote keys", [false, false, false, true, true]]
         ]}
       ],
       skyblock: [
