@@ -9,7 +9,8 @@
 // Images are downloaded into news/media/ because Discord's attachment links expire.
 //
 // Writing a post in Discord:
-//   - The first line is the title. "# Title" or "**Title**" both work.
+//   - The first line is the title. "# Title" or "**Title**" both work, and so does a plain
+//     first line of up to 100 characters when more text follows it.
 //   - Start the title with [Survival], [Skyblock] or [Network] to tag it (default Network).
 //   - The first image attached becomes the cover; later images go under the text.
 //   - Put [noweb] anywhere in a message to keep it off the site.
@@ -173,6 +174,14 @@ async function toPost(msg, offline) {
     tag = TAGS[tagMatch[1].toLowerCase()];
     if (title) title = title.slice(tagMatch[0].length);
     else lines[0] = lines[0].replace(tagMatch[0], "");
+  }
+  // No heading markup: a short first line followed by more text still reads as the title.
+  if (!title && lines.length > 1 && lines.slice(1).some((l) => l.trim())) {
+    const candidate = lines[0].trim();
+    if (candidate && candidate.length <= 100) {
+      title = candidate.replace(/^\*\*(.+)\*\*$/, "$1").replace(/^__(.+)__$/, "$1");
+      lines.shift();
+    }
   }
 
   const users = {};

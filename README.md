@@ -49,7 +49,7 @@ announcements channel by `scripts/sync-news.mjs`. A GitHub Action
 that commit redeploys Pages. Editing or deleting a Discord post updates the site on the next run.
 
 To write a post, use the announcements channel as normal:
-- The first line is the title, written as `# Title` or `**Title**`.
+- The first line is the title, written as `# Title`, `**Title**` or just a plain short line (up to 100 characters) with the post text below it.
 - Start the title with `[Survival]`, `[Skyblock]` or `[Network]` to tag it. Untagged posts are tagged Network.
 - The first image attached is the cover; any later images go under the text. Images are
   copied into `news/media/`, because Discord's attachment links expire.
