@@ -1,0 +1,40 @@
+{
+  "posts": [
+    {
+      "id": "seed3",
+      "date": "2026-11-19T19:47:31+00:00",
+      "edited": null,
+      "title": "Welcome to OCG Network",
+      "tag": "Network",
+      "author": "OverCrafted Games",
+      "cover": null,
+      "images": [],
+      "html": "<p>CarbonCraft is now <strong>OCG Survival</strong>, the first server on <strong>OCG Network</strong>: the home for every Minecraft server we run at OverCrafted Games.</p>\n<p>How you play doesn't change. It's the same world, the same economy, the same community and the same address: <code>play.carboncraft.xyz</code></p>\n<p><strong>What's new</strong></p>\n<ul><li><strong>One store for every server</strong> at <a href=\"https://minecraft.ocgames.xyz\" rel=\"noopener\">https://minecraft.ocgames.xyz</a></li><li><strong>Network ranks</strong>: buy a rank once and it works on every OCG server, with perks that fit each one.</li><li><strong>OCG+</strong>: a monthly loot drop of crate keys, Credits and cosmetics, delivered on every server.</li><li><strong>Credits</strong>: the network currency. One balance you can spend anywhere.</li></ul>\n<p>Have Carbon+ or CarbonCoins? We'll post exactly what happens to them before anything changes in game.</p>\n<p><strong>What's next</strong><br>OCG Skyblock is in development. More on that soon.</p>\n<p>Questions? Ask us here in Discord.</p>",
+      "excerpt": "CarbonCraft is now OCG Survival, the first server on OCG Network: the home for every Minecraft server we run at OverCrafted Games. How you play doesn't change. It's the same world, the same economy, the same…"
+    },
+    {
+      "id": "seed2",
+      "date": "2026-11-19T18:47:31+00:00",
+      "edited": null,
+      "title": "OCG+ is now a monthly loot drop",
+      "tag": "Network",
+      "author": "OverCrafted Games",
+      "cover": null,
+      "images": [],
+      "html": "<p>OCG+ has been rebuilt around loot. Pick one of three tiers and get a drop every month, on every OCG server:</p>\n<ul><li><strong>OCG+ I</strong>: $10 a month</li><li><strong>OCG+ II</strong>: $20 a month</li><li><strong>OCG+ III</strong>: $30 a month</li></ul>\n<p>Every drop includes crate keys, Credits and that month's cosmetic. Higher tiers get more of everything, plus extras like plushies. See exactly what each tier gets at <a href=\"https://minecraft.ocgames.xyz/plus.html\" rel=\"noopener\">https://minecraft.ocgames.xyz/plus.html</a></p>\n<p>Perks like extra homes and commands now come from <strong>network ranks</strong>. Ranks are permanent, work on every server, and stack with OCG+.</p>\n<p>You can cancel any time from your Tebex payment history, and anything you've already received stays yours.</p>",
+      "excerpt": "OCG+ has been rebuilt around loot. Pick one of three tiers and get a drop every month, on every OCG server: OCG+ I: $10 a month OCG+ II: $20 a month OCG+ III: $30 a month Every drop includes crate keys, Credits and…"
+    },
+    {
+      "id": "seed1",
+      "date": "2026-11-19T17:47:31+00:00",
+      "edited": null,
+      "title": "OCG Skyblock is in development",
+      "tag": "Skyblock",
+      "author": "OverCrafted Games",
+      "cover": null,
+      "images": [],
+      "html": "<p>The second server on OCG Network is on its way: <strong>OCG Skyblock</strong>.</p>\n<p>Start on a rock in the sky and build it into an empire, alone or with a team. Like everything we make, it's getting custom items, menus and events built in house.</p>\n<p>Your network rank, OCG+ loot and Credits balance will all work on Skyblock from day one.</p>\n<p>We'll share dates and a first look here as soon as we can.</p>",
+      "excerpt": "The second server on OCG Network is on its way: OCG Skyblock. Start on a rock in the sky and build it into an empire, alone or with a team. Like everything we make, it's getting custom items, menus and events built…"
+    }
+  ]
+}

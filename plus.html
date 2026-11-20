@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/config.js"></script>
+  <script src="assets/data.js"></script>
+  <script defer src="https://js.tebex.io/v/1.js"></script>
+  <script defer src="assets/layout.js"></script>
+  <script defer src="assets/store.js"></script>
+  <title>OCG+ · OCG Network</title>
+  <meta name="description" content="OCG+: a monthly loot drop of crate keys, Credits and cosmetics on every OCG Network server.">
+</head>
+<body data-page="plus" data-area="store">
+  <header id="site-header"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <div>
+          <p class="label">Monthly subscription</p>
+          <h1>OCG<em>+</em></h1>
+          <p class="lede">A loot drop every month: crate keys, Credits and cosmetics, delivered on every
+            OCG server. Pick a tier, change or cancel any time.</p>
+        </div>
+        <div class="page-head__art" style="color: var(--teal)" id="plus-art"></div>
+      </div>
+    </section>
+
+    <section class="wrap section" data-reveal>
+      <div class="plus-tiers" data-plus>
+        <p class="muted">Loading tiers…</p>
+      </div>
+      <p class="muted small" style="margin-top:16px">Prices in USD. Taxes are added at checkout where they apply.
+        Subscriptions renew monthly until cancelled.</p>
+    </section>
+
+    <section class="wrap section" data-reveal>
+      <div class="section-head">
+        <div>
+          <p class="label">How it works</p>
+          <h2>Subscribe once, loot every month</h2>
+        </div>
+      </div>
+      <div class="explain">
+        <div class="step surface">
+          <h3>Subscribe</h3>
+          <p>Pick a tier and check out. Your first drop arrives right away.</p>
+        </div>
+        <div class="step surface">
+          <h3>Loot every month</h3>
+          <p>Each renewal delivers that month's keys, Credits and cosmetic to every OCG server.</p>
+        </div>
+        <div class="step surface">
+          <h3>Keep what you get</h3>
+          <p>Cancel whenever you like. Everything you've already received stays yours.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section section--end" data-reveal>
+      <div class="duo">
+        <div class="panel surface">
+          <p class="label">OCG+ or a rank?</p>
+          <h2>Loot vs perks</h2>
+          <p><strong>OCG+</strong> is loot: things you collect and use, delivered every month on every
+            server.</p>
+          <p><strong>Ranks</strong> are perks: extra homes, commands and limits that last forever on
+            every server. They stack with OCG+.</p>
+          <div class="panel__links">
+            <a class="btn btn--sm btn--ghost" href="ranks.html">Compare ranks</a>
+          </div>
+        </div>
+        <div class="panel surface">
+          <p class="label">Manage</p>
+          <h2>Change or cancel</h2>
+          <p>Subscriptions are handled by Tebex. Upgrade, downgrade or cancel from your Tebex
+            payment history at any time.</p>
+          <div class="panel__links">
+            <a class="btn btn--sm btn--ghost" href="https://checkout.tebex.io/payment-history/login">Manage subscription</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>document.getElementById("plus-art").innerHTML = (window.NETWORK_ART || {}).plus || "";</script>
+</body>
+</html>

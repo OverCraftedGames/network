@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/config.js"></script>
+  <script src="assets/data.js"></script>
+  <script defer src="https://js.tebex.io/v/1.js"></script>
+  <script defer src="assets/layout.js"></script>
+  <script defer src="assets/store.js"></script>
+  <title>OCG Skyblock · OCG Network</title>
+  <meta name="description" content="OCG Skyblock is the next server on OCG Network. Coming soon.">
+</head>
+<body data-page="skyblock" data-accent="skyblock">
+  <header id="site-header"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <div>
+          <p class="label">Server · coming soon</p>
+          <h1>OCG <em>Skyblock</em></h1>
+          <p class="lede">Start on a rock in the sky and build it into an empire. Skyblock is the next
+            server on OCG Network, and your OCG+ and Credits will work there from day one.</p>
+          <div class="hero__cta" style="margin-top:24px">
+            <a class="btn btn--accent" href="https://discord.gg/carboncraft">Get notified in Discord</a>
+            <a class="btn btn--ghost" href="ranks.html#skyblock">Preview rank perks</a>
+          </div>
+        </div>
+        <div class="page-head__art" id="skyblock-art"></div>
+      </div>
+    </section>
+
+    <!-- PLACEHOLDER: swap in the real Skyblock features once they're decided. -->
+    <section class="wrap section" data-reveal>
+      <div class="section-head">
+        <div>
+          <p class="label">What to expect</p>
+          <h2>Built the OCG way</h2>
+          <p>Details are still being worked out. Here's the direction.</p>
+        </div>
+      </div>
+      <div class="features">
+        <div class="feature surface"><h3>Your own island</h3><p>Grow it alone or with a team, and expand it as you progress.</p></div>
+        <div class="feature surface"><h3>Custom content</h3><p>Custom items, menus and events, made in house like on Survival.</p></div>
+        <div class="feature surface"><h3>Island rankings</h3><p>Compete for the top island on the leaderboards.</p></div>
+        <div class="feature surface"><h3>Shared network perks</h3><p>Your rank, OCG+ loot and Credits balance work there from day one.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap section section--end" data-reveal>
+      <div class="duo">
+        <div class="panel surface">
+          <p class="label">Already on the network?</p>
+          <h2>Your stuff comes with you</h2>
+          <p>Credits are one balance across every OCG server, and an OCG+ subscription delivers its
+            monthly loot on Skyblock as soon as it opens, and your rank comes with you with its own Skyblock perks.</p>
+          <div class="panel__links">
+            <a class="btn btn--sm btn--ghost" href="plus.html">About OCG+</a>
+            <a class="btn btn--sm btn--ghost" href="credits.html">About Credits</a>
+          </div>
+        </div>
+        <div class="panel surface">
+          <p class="label">Wiki</p>
+          <h2>Guides at launch</h2>
+          <p>The Skyblock wiki opens alongside the server. Until then, the Survival wiki covers the
+            network basics.</p>
+          <div class="panel__links">
+            <a class="btn btn--sm btn--ghost" href="wikis.html">All wikis</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>document.getElementById("skyblock-art").innerHTML = (window.NETWORK_ART || {}).skyblock || "";</script>
+</body>
+</html>

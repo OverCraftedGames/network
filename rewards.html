@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/config.js"></script>
+  <script src="assets/data.js"></script>
+  <script defer src="https://js.tebex.io/v/1.js"></script>
+  <script defer src="assets/layout.js"></script>
+  <script defer src="assets/store.js"></script>
+  <title>Store rewards · OCG Network</title>
+  <meta name="description" content="Store rewards: monthly bonuses, the server goal and Supporter of the Month.">
+</head>
+<body data-page="rewards" data-area="store">
+  <header id="site-header"></header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <div>
+          <p class="label">Store rewards</p>
+          <h1>Spend more. <span class="grad">Get more.</span></h1>
+          <p class="lede">On OCG Survival, everything you buy also counts towards rewards on top of the package
+            itself: monthly bonuses, a server goal that pays out to everyone who plays, and
+            Supporter of the Month.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section">
+      <div class="callout">Monthly rewards, the server goal and Supporter of the Month start in
+        <strong>November 2026</strong>. Months run on UTC time, from the 1st to the last day.</div>
+      <div class="steps" data-reveal>
+        <div class="step surface">
+          <h3>Buy anything</h3>
+          <p>Every purchase from the store counts, whatever the package.</p>
+        </div>
+        <div class="step surface">
+          <h3>It adds up</h3>
+          <p>Your total for the month unlocks rewards, and every purchase also moves the server goal.</p>
+        </div>
+        <div class="step surface">
+          <h3>Claim in game</h3>
+          <p>Rewards wait for you in <span class="cmd">/storerewards</span> for as long as you like.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="monthly" data-reveal>
+      <div class="section-head">
+        <div>
+          <p class="label">Monthly rewards</p>
+          <h2>What you spend this month</h2>
+          <p>Each reward pays once a month, and they stack: reach $150 and you get all three.
+            Your total resets on the 1st.</p>
+        </div>
+      </div>
+      <div class="tiers">
+        <div class="tier tier--1 surface">
+          <span class="tier__label">Tier 1</span>
+          <div class="tier__amount">$25 <small>this month</small></div>
+          <ul>
+            <li><svg width="20" height="20"><use href="#i-key"/></svg>2 Plasma Keys</li>
+          </ul>
+          <p class="tier__slots">No free slots needed</p>
+        </div>
+        <div class="tier tier--2 surface">
+          <span class="tier__label">Tier 2</span>
+          <div class="tier__amount">$75 <small>this month</small></div>
+          <ul>
+            <li><svg width="20" height="20"><use href="#i-key"/></svg>2 Iridium Keys</li>
+            <li><svg width="20" height="20"><use href="#i-plush"/></svg>A random plushie</li>
+          </ul>
+          <p class="tier__slots">Needs 1 free inventory slot</p>
+        </div>
+        <div class="tier tier--3 surface">
+          <span class="tier__label">Tier 3</span>
+          <div class="tier__amount">$150 <small>this month</small></div>
+          <ul>
+            <li><svg width="20" height="20"><use href="#i-key"/></svg>4 Iridium Keys</li>
+            <li><svg width="20" height="20"><use href="#i-plush"/></svg>2 random plushies</li>
+          </ul>
+          <p class="tier__slots">Needs 2 free inventory slots</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="goal" data-reveal>
+      <div class="section-head">
+        <div>
+          <p class="label">Server goal</p>
+          <h2>Everyone wins together</h2>
+          <p>Every purchase from every player counts towards a server-wide goal for the month.
+            When it reaches a stage, everyone who has played 3 hours that month gets the reward,
+            whether they bought anything or not.</p>
+        </div>
+      </div>
+      <div class="goal surface">
+        <div class="track">
+          <div class="stage" style="left: 33.33%">
+            <span class="stage__amt">$500</span><span class="stage__dot"></span><span class="stage__reward">1 Carbon Key</span>
+          </div>
+          <div class="stage" style="left: 66.66%">
+            <span class="stage__amt">$1,000</span><span class="stage__dot"></span><span class="stage__reward">1 Plasma Key</span>
+          </div>
+          <div class="stage" style="left: 100%">
+            <span class="stage__amt">$1,500</span><span class="stage__dot"></span><span class="stage__reward">1 Iridium Key</span>
+          </div>
+        </div>
+        <div class="goal__notes">
+          <div>Each stage is announced in chat when it's reached.</div>
+          <div>Time spent AFK doesn't count towards the 3 hours.</div>
+          <div>Reach 3 hours after a stage was hit and you still get it, as long as it's the same month.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="mvp" data-reveal>
+      <div class="section-head">
+        <div>
+          <p class="label">Supporter of the Month</p>
+          <h2>The top three</h2>
+          <p>The three players who spent the most on the store in a month are announced to the
+            server and rewarded.</p>
+        </div>
+      </div>
+      <div class="podium">
+        <div class="place surface">
+          <div class="place__rank">#2</div>
+          <h3>Second place</h3>
+          <p>3 Iridium Keys<br>+ a random plushie</p>
+        </div>
+        <div class="place place--1 surface">
+          <span class="mc-tag"><span style="color:#555555">[</span><span style="color:#0B3D91">M</span><span style="color:#2F649E">V</span><span style="color:#548BAB">P</span><span style="color:#FFFFFF">™</span><span style="color:#555555">]</span></span>
+          <div class="place__rank">#1</div>
+          <h3>Supporter of the Month</h3>
+          <p>The [MVP™] tag, 5 Iridium Keys<br>+ a random plushie</p>
+        </div>
+        <div class="place surface">
+          <div class="place__rank">#3</div>
+          <h3>Third place</h3>
+          <p>2 Iridium Keys<br>+ a random plushie</p>
+        </div>
+      </div>
+      <ul class="rules">
+        <li>Only that month's spending counts, and you need at least <strong>$50</strong> that month to place.</li>
+        <li>Winners are picked <strong>two days after the month ends</strong>, so late payments still count.</li>
+        <li>If two players spent the same, the one who got there first places higher.</li>
+        <li>The [MVP™] tag is yours until the next month's MVP is announced, then it moves on.</li>
+        <li>Rather not be named? Click the Supporter of the Month name tag in <span class="cmd">/storerewards</span> to hide yourself. While hidden you can't place.</li>
+        <li>Plushies need one free inventory slot to claim.</li>
+      </ul>
+    </section>
+
+    <section class="wrap section" id="seasonal" data-until="2026-10-31" data-reveal>
+      <div class="offer surface">
+        <div class="offer__icon"><svg width="32" height="32"><use href="#i-gift"/></svg></div>
+        <div>
+          <p class="label">Seasonal offer</p>
+          <h3>Halloween Plushies Pack</h3>
+          <p>Any single purchase of <strong>$19 or more</strong> adds ten Halloween plushies,
+            with 27 poses between them, to your rewards chest. Needs 10 free inventory slots to claim.</p>
+        </div>
+        <a class="btn" href="store.html">Shop now</a>
+      </div>
+    </section>
+
+    <section class="wrap section" id="claiming" data-reveal>
+      <div class="claim">
+        <div class="panel surface">
+          <p class="label">Claiming</p>
+          <h2>Your rewards chest</h2>
+          <p>Type <span class="cmd">/storerewards</span> (or <span class="cmd">/claimrewards</span>)
+            in game. Click a reward to claim it, or <strong>Claim All</strong> to take everything that fits.</p>
+          <p>Crate keys go straight into your account and need no space. Plushies need free
+            inventory slots, and each reward shows how many. You'll get a reminder in chat when you
+            join with something unclaimed.</p>
+        </div>
+        <div class="panel surface">
+          <p class="label">Good to know</p>
+          <h2>Give it a few minutes</h2>
+          <p>Your store package arrives instantly, but these extra rewards are checked every five
+            minutes. If one hasn't shown up yet, give it a moment.</p>
+          <p>Your head at the top of <span class="cmd">/storerewards</span> shows your lifetime
+            support, this month's total and your next monthly reward.</p>
+          <div class="panel__links">
+            <a class="btn btn--sm btn--ghost" href="https://wiki.carboncraft.xyz/store/">Read more on the wiki</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

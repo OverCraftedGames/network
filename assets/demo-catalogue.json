@@ -1,0 +1,298 @@
+{
+  "note": "EXAMPLE catalogue for preview mode (2026-11-19): the planned OCG Network categories with placeholder ranks and prices. Live mode reads the Headless API.",
+  "account": {
+    "name": "OCG Network",
+    "currency": {
+      "iso_4217": "USD",
+      "symbol": "$"
+    }
+  },
+  "data": [
+    {
+      "id": 9000001,
+      "name": "OCG+",
+      "slug": "ocg-plus",
+      "description": "<p>A monthly loot drop across the whole network: crate keys, Credits and cosmetics.</p>",
+      "order": 0,
+      "packages": [
+        {
+          "id": 9100001,
+          "name": "OCG+ I",
+          "description": "<p>Placeholder description. Contents are listed on the OCG+ page.</p>",
+          "image": "assets/icons/plus-1.svg",
+          "type": "subscription",
+          "category": {
+            "id": 9000001,
+            "name": "OCG+"
+          },
+          "base_price": 10,
+          "sales_tax": 0,
+          "total_price": 10,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 0,
+          "expiry_period": {
+            "count": 1,
+            "unit": "month"
+          }
+        },
+        {
+          "id": 9100002,
+          "name": "OCG+ II",
+          "description": "<p>Placeholder description. Contents are listed on the OCG+ page.</p>",
+          "image": "assets/icons/plus-2.svg",
+          "type": "subscription",
+          "category": {
+            "id": 9000001,
+            "name": "OCG+"
+          },
+          "base_price": 20,
+          "sales_tax": 0,
+          "total_price": 20,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 1,
+          "expiry_period": {
+            "count": 1,
+            "unit": "month"
+          }
+        },
+        {
+          "id": 9100003,
+          "name": "OCG+ III",
+          "description": "<p>Placeholder description. Contents are listed on the OCG+ page.</p>",
+          "image": "assets/icons/plus-3.svg",
+          "type": "subscription",
+          "category": {
+            "id": 9000001,
+            "name": "OCG+"
+          },
+          "base_price": 30,
+          "sales_tax": 0,
+          "total_price": 30,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 2,
+          "expiry_period": {
+            "count": 1,
+            "unit": "month"
+          }
+        }
+      ]
+    },
+    {
+      "id": 9000002,
+      "name": "Ranks",
+      "slug": "ranks",
+      "description": "<p>Permanent, network-wide ranks. One purchase works on every OCG server.</p>",
+      "order": 1,
+      "packages": [
+        {
+          "id": 9200001,
+          "name": "Copper",
+          "description": "",
+          "image": "assets/icons/rank-copper.svg",
+          "type": "single",
+          "category": {
+            "id": 9000002,
+            "name": "Ranks"
+          },
+          "base_price": 10,
+          "sales_tax": 0,
+          "total_price": 10,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 0
+        },
+        {
+          "id": 9200002,
+          "name": "Iron",
+          "description": "",
+          "image": "assets/icons/rank-iron.svg",
+          "type": "single",
+          "category": {
+            "id": 9000002,
+            "name": "Ranks"
+          },
+          "base_price": 25,
+          "sales_tax": 0,
+          "total_price": 25,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 1
+        },
+        {
+          "id": 9200003,
+          "name": "Gold",
+          "description": "",
+          "image": "assets/icons/rank-gold.svg",
+          "type": "single",
+          "category": {
+            "id": 9000002,
+            "name": "Ranks"
+          },
+          "base_price": 50,
+          "sales_tax": 0,
+          "total_price": 50,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 2
+        },
+        {
+          "id": 9200004,
+          "name": "Diamond",
+          "description": "",
+          "image": "assets/icons/rank-diamond.svg",
+          "type": "single",
+          "category": {
+            "id": 9000002,
+            "name": "Ranks"
+          },
+          "base_price": 100,
+          "sales_tax": 0,
+          "total_price": 100,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 3
+        },
+        {
+          "id": 9200005,
+          "name": "Emerald",
+          "description": "",
+          "image": "assets/icons/rank-emerald.svg",
+          "type": "single",
+          "category": {
+            "id": 9000002,
+            "name": "Ranks"
+          },
+          "base_price": 150,
+          "sales_tax": 0,
+          "total_price": 150,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 4
+        }
+      ]
+    },
+    {
+      "id": 9000004,
+      "name": "Credits",
+      "slug": "credits",
+      "description": "<p>The network currency. One balance, spendable on every OCG server.</p>",
+      "order": 2,
+      "packages": [
+        {
+          "id": 9400001,
+          "name": "Starter Pack [500 Credits]",
+          "description": "",
+          "image": "assets/icons/credits.svg",
+          "type": "single",
+          "category": {
+            "id": 9000004,
+            "name": "Credits"
+          },
+          "base_price": 4.99,
+          "sales_tax": 0,
+          "total_price": 4.99,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 0
+        },
+        {
+          "id": 9400002,
+          "name": "Value Pack [1,000 + 100 Bonus Credits]",
+          "description": "",
+          "image": "assets/icons/credits.svg",
+          "type": "single",
+          "category": {
+            "id": 9000004,
+            "name": "Credits"
+          },
+          "base_price": 9.99,
+          "sales_tax": 0,
+          "total_price": 9.99,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 1
+        },
+        {
+          "id": 9400003,
+          "name": "Popular Pack [2,000 + 400 Bonus Credits]",
+          "description": "",
+          "image": "assets/icons/credits.svg",
+          "type": "single",
+          "category": {
+            "id": 9000004,
+            "name": "Credits"
+          },
+          "base_price": 19.99,
+          "sales_tax": 0,
+          "total_price": 19.99,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 2
+        },
+        {
+          "id": 9400004,
+          "name": "Elite Pack [5,000 + 1,500 Bonus Credits]",
+          "description": "",
+          "image": "assets/icons/credits.svg",
+          "type": "single",
+          "category": {
+            "id": 9000004,
+            "name": "Credits"
+          },
+          "base_price": 49.99,
+          "sales_tax": 0,
+          "total_price": 49.99,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 3
+        },
+        {
+          "id": 9400005,
+          "name": "Ultimate Pack [10,000 + 4,000 Bonus Credits]",
+          "description": "",
+          "image": "assets/icons/credits.svg",
+          "type": "single",
+          "category": {
+            "id": 9000004,
+            "name": "Credits"
+          },
+          "base_price": 99.99,
+          "sales_tax": 0,
+          "total_price": 99.99,
+          "currency": "USD",
+          "discount": 0,
+          "disable_quantity": true,
+          "disable_gifting": false,
+          "order": 4
+        }
+      ]
+    }
+  ]
+}
