@@ -88,8 +88,7 @@ window.NETWORK = {
       network: [
         { title: "Everywhere", perks: [
           ["Rank tag in chat and tab on every server", [true, true, true, true, true]],
-          ["Rank role in Discord", [true, true, true, true, true]],
-          ["Coloured chat", [false, true, true, true, true]]
+          ["Rank role in Discord", [true, true, true, true, true]]
         ]}
       ],
       // Emerald must cover everything Carbon+ Lifetime gave (Lifetime holders move to it).
@@ -103,9 +102,9 @@ window.NETWORK = {
         { title: "Commands", perks: [
           ["/hat and /workbench", [true, true, true, true, true]],
           ["/enderchest", [false, true, true, true, true]],
+          ["/chatcolor", [false, true, true, true, true]],
           ["/nick", [false, false, true, true, true]],
           ["/heads", [false, false, true, true, true]],
-          ["/back", [false, false, true, true, true]],
           ["/fly in your own claims", [false, false, false, true, true]]
         ]},
         { title: "Extras", perks: [
