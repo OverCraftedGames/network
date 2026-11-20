@@ -169,6 +169,6 @@ window.NETWORK_ART = {
   </svg>`,
   plus: `<svg viewBox="0 0 48 48" aria-hidden="true">
     <rect x="9" y="9" width="30" height="30" rx="3" transform="rotate(45 24 24)" fill="none" stroke="currentColor" stroke-width="3"/>
-    <path d="M24 16v16M16 24h16" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M26.5 14L18.5 25.5h5l-1.5 8.5 8-11.5h-5z" fill="currentColor"/>
   </svg>`
 };
