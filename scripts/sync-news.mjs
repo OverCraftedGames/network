@@ -14,8 +14,9 @@
 //   - Start the title with [Survival], [Skyblock] or [Network] to tag it (default Network).
 //   - The first image attached becomes the cover; later images go under the text.
 //   - Put [noweb] anywhere in a message to keep it off the site.
-//   - Editing or deleting the Discord message updates the site on the next sync.
-import { mkdir, readFile, writeFile, access } from "node:fs/promises";
+//   - Editing or deleting the Discord message updates the site on the next sync, and
+//     images no post uses any more are deleted from news/media/.
+import { mkdir, readFile, writeFile, access, readdir, unlink } from "node:fs/promises";
 import { dirname, join, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -255,6 +256,16 @@ async function main() {
   posts.sort((a, b) => b.date.localeCompare(a.date));
 
   const next = JSON.stringify({ posts }, null, 2) + "\n";
+
+  // Delete images no post uses any more (deleted, [noweb] or edited posts), so they
+  // stop being published too.
+  if (!offline) {
+    const used = new Set((next.match(/news\/media\/[^"\\]+/g) || []).map((p) => p.slice("news/media/".length)));
+    for (const name of await readdir(MEDIA)) {
+      if (!used.has(name)) { await unlink(join(MEDIA, name)); console.log(`Removed unused image ${name}.`); }
+    }
+  }
+
   const prev = await readFile(OUT, "utf8").catch(() => "");
   if (prev === next) { console.log("News unchanged."); return; }
   await writeFile(OUT, next);
