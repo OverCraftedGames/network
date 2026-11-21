@@ -30,8 +30,9 @@ window.NETWORK = {
   ],
 
   // OCG+ monthly tiers, cheapest first ($5 / $10 / $20).
+  // Keys are named by tier (T1 to T4), not crate name, because each server names its crates differently.
   // Credits + keys are worth about half of a Credits pack at the same price (keys counted at
-  // their coin-shop price: Carbon 75, Plasma 125, Iridium 350). More perks get added over time.
+  // their coin-shop price: T1 75, T2 125, T4 350). More perks get added over time.
   // Badge: one bolt by the name in chat and tab, coloured by tier (yellow / gold / pink).
   plus: [
     {
@@ -39,7 +40,7 @@ window.NETWORK = {
       tagline: "A monthly top-up",
       items: [
         ["coin", "<b>175 Credits</b> every month"],
-        ["key", "<b>1 Carbon key</b> every month"],
+        ["key", "<b>1 T1 crate key</b> every month"],
         ["gem", "A <b>yellow bolt</b> by your name in chat and tab"]
       ]
     },
@@ -49,7 +50,7 @@ window.NETWORK = {
       featured: true,
       items: [
         ["coin", "<b>425 Credits</b> every month"],
-        ["key", "<b>1 Plasma key</b> every month"],
+        ["key", "<b>1 T2 crate key</b> every month"],
         ["vote", "<b>Double vote keys</b>"],
         ["gem", "A <b>gold bolt</b> by your name in chat and tab"]
       ]
@@ -59,7 +60,7 @@ window.NETWORK = {
       tagline: "The full haul",
       items: [
         ["coin", "<b>850 Credits</b> every month"],
-        ["key", "<b>1 Iridium key</b> every month"],
+        ["key", "<b>1 T4 crate key</b> every month"],
         ["vote", "<b>Double vote keys</b>"],
         ["check", "<b>/fly</b> in your own claims"],
         ["gem", "A <b>pink bolt</b> by your name in chat and tab"]
