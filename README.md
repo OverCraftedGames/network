@@ -94,16 +94,16 @@ turns checkout off. `?live` forces live mode while testing; `?demo` forces previ
    | Category | Packages | Commands (CarbonCraft server) |
    |---|---|---|
    | OCG+ (30-day subscriptions) | OCG+ Charged $5, Overcharged $10, Supercharged $20 | On purchase and renewal: `lp user {username} parent addtemp ocgplusN 30d`, `ocg credits give {username} 175/425/850 {transaction}` and `ecrates key give {username} t1_key/t2_key/t4_key 1` (key ids are network-wide tiers since 2026-11-21: Skyblock already uses `t1_key` to `t4_key`; CarbonCraft's keys still need renaming from carbon/plasma/fusion/iridium). Each renewal is a new Tebex payment with its own `tbx-` id (checked 2026-11-20), so OCGCore's duplicate check never skips one. The monthly plushie was dropped from OCG+ on 2026-11-20, because a plushie pool has to work on every server. Cosmetic trails may replace it later |
-   | Ranks (one-off) | Copper $10, Iron $25, Gold $50, Diamond $100, Emerald $150 | Purchase: `lp user {username} parent add <rank>`. Refund and chargeback: `parent remove <rank>` |
+   | Ranks (one-off) | Pawn $10, Knight $25, Bishop $50, Rook $100, King $150 | Purchase: `lp user {username} parent add <rank>`. Refund and chargeback: `parent remove <rank>` |
    | Credits (one-off) | The five CarbonCoins packs, renamed, same prices | `ocg credits give {username} <amount> {transaction}` (OCGCore network Credits, only while the player is online). Quantity is locked to 1, because two copies in one payment would share a transaction ref and only pay once. Descriptions point to `/credits` |
 
    The site pairs tiers and ranks with `data.js` by `order`, then price, then id, so the
    packages don't need dragging into order in the panel.
 
    **Before launch:**
-   - Create the LuckPerms groups `copper`, `iron`, `gold`, `diamond`, `emerald`, `ocgplus1`,
+   - Create the LuckPerms groups `pawn`, `knight`, `bishop`, `rook`, `king`, `ocgplus1`,
      `ocgplus2` and `ocgplus3` on every server. Without them, purchases deliver nothing.
-     (Done on Survival, 2026-11-20.)
+     (The old copper..emerald groups were made on Survival 2026-11-20; the chess groups are not made yet.)
    - Install OCGCore (E:\OverCrafted Games\OCGCore) on every server, each with its own `server-id`.
      The Credits and OCG+ packages run `ocg credits give`, so without it these purchases deliver nothing.
      Run `/ocg credits import-cmi` on CarbonCraft once so CarbonCoins balances carry over.
@@ -112,13 +112,13 @@ turns checkout off. `?live` forces live mode while testing; `?demo` forces previ
      before the OCG+ packages run on both servers.
 
    **Launch day:** enable the three new categories, disable Carbon+ and CarbonCoins, rename the
-   Tebex project to "OCG Network", and run `lp user <name> parent add emerald` for each Carbon+ Lifetime buyer (look them up under Payments).
+   Tebex project to "OCG Network", and run `lp user <name> parent add king` for each Carbon+ Lifetime buyer (look them up under Payments).
    - Add the Skyblock game server in the Tebex panel. Every package (ranks, OCG+ and Credits)
      runs its commands on every server. Ranks are network-wide; each server decides
      the perks a rank gives (for example through LuckPerms groups with the same name on every server).
    - Retire the old Carbon+ and CarbonCoins packages (hide them; don't delete, so past payments keep their history).
    - Carbon+ migration: monthly, 3-month and 6-month subscriptions keep working until they
-     expire and are not renewed as OCG+. Carbon+ Lifetime holders get the top permanent rank (Emerald) for free.
+     expire and are not renewed as OCG+. Carbon+ Lifetime holders get the top permanent rank (King) for free.
    - CarbonCoins become Credits with the same five packs and prices. Balances carry over 1:1.
 2. Fill in the real tier contents, ranks and perks in `data.js`.
 3. Set `forceDemo: false` and test against the live catalogue. Then make one real low-value

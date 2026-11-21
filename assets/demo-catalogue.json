@@ -95,7 +95,7 @@
       "packages": [
         {
           "id": 9200001,
-          "name": "Copper",
+          "name": "Pawn",
           "description": "",
           "image": "assets/icons/rank-copper.svg",
           "type": "single",
@@ -114,7 +114,7 @@
         },
         {
           "id": 9200002,
-          "name": "Iron",
+          "name": "Knight",
           "description": "",
           "image": "assets/icons/rank-iron.svg",
           "type": "single",
@@ -133,7 +133,7 @@
         },
         {
           "id": 9200003,
-          "name": "Gold",
+          "name": "Bishop",
           "description": "",
           "image": "assets/icons/rank-gold.svg",
           "type": "single",
@@ -152,7 +152,7 @@
         },
         {
           "id": 9200004,
-          "name": "Diamond",
+          "name": "Rook",
           "description": "",
           "image": "assets/icons/rank-diamond.svg",
           "type": "single",
@@ -171,7 +171,7 @@
         },
         {
           "id": 9200005,
-          "name": "Emerald",
+          "name": "King",
           "description": "",
           "image": "assets/icons/rank-emerald.svg",
           "type": "single",

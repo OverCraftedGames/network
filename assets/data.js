@@ -72,15 +72,15 @@ window.NETWORK = {
   // Only the perks differ per server. "ladder" is in Tebex order (cheapest first);
   // "perks.network" applies everywhere, the other keys are per server (matching servers[].id).
   // A perk value is shown as written; true shows a tick, false or "" shows a dash.
-  // PLACEHOLDER: names, colours and perks are examples until the real ladder is set.
+  // Chess ladder decided 2026-11-21: Pawn $10, Knight $25, Bishop $50, Rook $100, King $150.
   ranks: {
     ladder: [
-      { name: "Copper", color: "#e08a5a" },
-      { name: "Iron", color: "#d8dde0" },
-      { name: "Gold", color: "#ffd23f" },
-      { name: "Diamond", color: "#5ef0f0" },
+      { name: "Pawn", color: "#a9b1b6" },
+      { name: "Knight", color: "#6fb6e8" },
+      { name: "Bishop", color: "#b88cf0" },
+      { name: "Rook", color: "#f06a5a" },
       // Top rank. Carbon+ Lifetime holders are moved to this rank (see README, Going live).
-      { name: "Emerald", color: "#3ddc84" }
+      { name: "King", color: "#ffcf3a" }
     ],
     perks: {
       network: [
@@ -89,7 +89,7 @@ window.NETWORK = {
           ["Rank role in Discord", [true, true, true, true, true]]
         ]}
       ],
-      // Emerald must cover everything Carbon+ Lifetime gave (Lifetime holders move to it).
+      // King must cover everything Carbon+ Lifetime gave (Lifetime holders move to it).
       survival: [
         { title: "Limits", perks: [
           ["Homes", ["5", "8", "10", "15", "20"]],
