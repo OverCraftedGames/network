@@ -1,3 +1,16 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "id": "1573777948085981205",
+      "date": "2026-11-21T19:11:42.204000+00:00",
+      "edited": "2026-11-21T19:12:08.434000+00:00",
+      "title": "Welcome to OCG Network",
+      "tag": "Network",
+      "author": "Apathy",
+      "cover": null,
+      "images": [],
+      "html": "<p>CarbonCraft is now <strong>OCG Survival</strong>, the first server on <strong>OCG Network</strong>: one home for every Minecraft server we run at OverCrafted Games.<br>Your world, items, claims, money and friends all stay right where they are.</p>\n<p><strong>What's new</strong></p>\n<ul><li><strong>New address:</strong> <code>play.ocgames.xyz</code> (<code>play.carboncraft.xyz</code> still works)</li><li><strong>One store for every server:</strong> <a href=\"https://minecraft.ocgames.xyz\" rel=\"noopener\">https://minecraft.ocgames.xyz</a></li><li><strong>Network ranks:</strong> buy once, keep it for good, use it on every OCG server.</li><li><strong>OCG+:</strong> a monthly loot drop of Credits and crate keys, on every server.</li><li><strong>Credits:</strong> the network currency. One balance you can spend anywhere.</li></ul>\n<p><strong>Coming from CarbonCraft?</strong></p>\n<ul><li><strong>CarbonCoins become Credits.</strong> Your balance carries over 1:1, automatically. Check it with <code>/credits</code> and see every purchase with <code>/credits history</code>. The coin packs stay the same, at the same prices. Need to move Credits to a friend? Ask staff and they'll set it up.</li><li><strong>Carbon+ (1, 3 or 6 months)</strong> keeps every perk until the time you paid for runs out. It won't turn into OCG+ on its own, so pick an OCG+ tier if you want to carry on.</li><li><strong>Carbon+ Lifetime</strong> holders get our <strong>top network rank</strong>, free and permanent, on every server. We'll add it for you on switch-over day.</li><li><strong>Crate keys</strong> don't change. Your keys and crates keep the same names.</li></ul>\n<p><strong>What's next</strong></p>\n<ul><li>QSBuZXR3b3JrIGxvYmJ5IGFuZCAqKk9DRyBTa3libG9jayoqIGFyZSBvbiB0aGUgd2F5LiBNb3JlIHNvb24u</li></ul>",
+      "excerpt": "CarbonCraft is now OCG Survival, the first server on OCG Network: one home for every Minecraft server we run at OverCrafted Games. Your world, items, claims, money and friends all stay right where they are. What's…"
+    }
+  ]
 }
