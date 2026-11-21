@@ -12,7 +12,7 @@ window.NETWORK = {
       name: "Survival",
       page: "survival.html",
       status: "live",
-      ip: "play.carboncraft.xyz",
+      ip: "play.ocgames.xyz",
       wiki: "https://wiki.carboncraft.xyz/",
       blurb: "Survival with a player economy, custom gear, land claims and a crew to play with.",
       tags: ["Economy", "Claims", "Custom items", "Factions"]

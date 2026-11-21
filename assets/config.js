@@ -12,8 +12,8 @@ window.STORE_CONFIG = {
     ranks: "ranks",
     credits: "credits"
   },
-  // Address players join with. The network has no shared IP yet, so this is Survival's.
-  networkIp: "play.carboncraft.xyz",
+  // Address players join with. Points at Survival until the Velocity proxy is up.
+  networkIp: "play.ocgames.xyz",
   discord: "https://discord.gg/carboncraft",
   // Discord widget on the home page: invite code (for member counts) and server id (for
   // the online list). The Server Widget must stay on in Discord's server settings.
