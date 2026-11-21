@@ -50,7 +50,6 @@ window.NETWORK = {
       items: [
         ["coin", "<b>425 Credits</b> every month"],
         ["key", "<b>1 Plasma key</b> every month"],
-        ["plush", "A <b>random plushie</b> every month"],
         ["vote", "<b>Double vote keys</b>"],
         ["gem", "A <b>gold bolt</b> by your name in chat and tab"]
       ]
@@ -61,9 +60,7 @@ window.NETWORK = {
       items: [
         ["coin", "<b>850 Credits</b> every month"],
         ["key", "<b>1 Iridium key</b> every month"],
-        ["plush", "A <b>random plushie</b> every month"],
         ["vote", "<b>Double vote keys</b>"],
-        ["crown", "That month's <b>exclusive tag</b>, yours to keep"],
         ["check", "<b>/fly</b> in your own claims"],
         ["gem", "A <b>pink bolt</b> by your name in chat and tab"]
       ]

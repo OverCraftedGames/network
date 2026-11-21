@@ -93,9 +93,9 @@ turns checkout off. `?live` forces live mode while testing; `?demo` forces previ
 
    | Category | Packages | Commands (CarbonCraft server) |
    |---|---|---|
-   | OCG+ (30-day subscriptions) | OCG+ Charged $5, Overcharged $10, Supercharged $20 | On purchase and renewal: `lp user {username} parent addtemp ocgplusN 30d`, `cmi usermeta {username} increment carboncoins 175/425/850` and `ecrates key give {username} carbon_key/plasma_key/iridium_key 1` |
+   | OCG+ (30-day subscriptions) | OCG+ Charged $5, Overcharged $10, Supercharged $20 | On purchase and renewal: `lp user {username} parent addtemp ocgplusN 30d`, `ocg credits give {username} 175/425/850 {transaction}` and `ecrates key give {username} carbon_key/plasma_key/iridium_key 1`. Each renewal is a new Tebex payment with its own `tbx-` id (checked 2026-11-20), so OCGCore's duplicate check never skips one. The monthly plushie was dropped from OCG+ on 2026-11-20, because a plushie pool has to work on every server. Cosmetic trails may replace it later |
    | Ranks (one-off) | Copper $10, Iron $25, Gold $50, Diamond $100, Emerald $150 | Purchase: `lp user {username} parent add <rank>`. Refund and chargeback: `parent remove <rank>` |
-   | Credits (one-off) | The five CarbonCoins packs, renamed, same prices | `cmi usermeta {username} increment carboncoins <amount>` (same key, so balances carry over) |
+   | Credits (one-off) | The five CarbonCoins packs, renamed, same prices | `ocg credits give {username} <amount> {transaction}` (OCGCore network Credits, only while the player is online). Quantity is locked to 1, because two copies in one payment would share a transaction ref and only pay once. Descriptions point to `/credits` |
 
    The site pairs tiers and ranks with `data.js` by `order`, then price, then id, so the
    packages don't need dragging into order in the panel.
@@ -103,9 +103,13 @@ turns checkout off. `?live` forces live mode while testing; `?demo` forces previ
    **Before launch:**
    - Create the LuckPerms groups `copper`, `iron`, `gold`, `diamond`, `emerald`, `ocgplus1`,
      `ocgplus2` and `ocgplus3` on every server. Without them, purchases deliver nothing.
-   - OCG+ commands give only the group and the Credits. Crate keys, cosmetics and plushies
-     listed in `data.js` have to come from the `ocgplusN` groups in-game, or from extra commands.
-   - Replace the package images. The clones kept the Carbon+ and coin art, and the site uses package images.
+     (Done on Survival, 2026-11-20.)
+   - Install OCGCore (E:\OverCrafted Games\OCGCore) on every server, each with its own `server-id`.
+     The Credits and OCG+ packages run `ocg credits give`, so without it these purchases deliver nothing.
+     Run `/ocg credits import-cmi` on CarbonCraft once so CarbonCoins balances carry over.
+   - `ecrates key give` is the old ExcellentCrates syntax. On ExcellentCrates 7 (OCG Skyblock) the
+     command is `cratekey give {username} <key> 1`. Check which one CarbonCraft's version takes
+     before the OCG+ packages run on both servers.
 
    **Launch day:** enable the three new categories, disable Carbon+ and CarbonCoins, rename the
    Tebex project to "OCG Network", and run `lp user <name> parent add emerald` for each Carbon+ Lifetime buyer (look them up under Payments).
