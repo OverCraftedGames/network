@@ -1,16 +1,3 @@
 {
-  "posts": [
-    {
-      "id": "1573751656619835531",
-      "date": "2026-11-21T17:27:13.830000+00:00",
-      "edited": null,
-      "title": "hi",
-      "tag": "Skyblock",
-      "author": "Apathy",
-      "cover": "news/media/1573751656619835531-0.png",
-      "images": [],
-      "html": "<p>hi</p>",
-      "excerpt": "hi"
-    }
-  ]
+  "posts": []
 }
