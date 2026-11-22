@@ -125,7 +125,7 @@ window.VOTE = {
       const left = hoursLeft(server.id, s.id, cooldown);
       return `
         <a class="vsite surface${left ? " vsite--done" : ""}" href="${esc(s.url)}" target="_blank" rel="noopener"
-          data-vote-site="${esc(s.id)}">
+          data-vote-site="${esc(s.id)}" data-site-server="${esc(server.id)}">
           <span class="vsite__num">${String(i + 1).padStart(2, "0")}</span>
           <span class="vsite__name">${esc(s.name)}</span>
           <span class="vsite__state">${left
@@ -211,24 +211,44 @@ window.VOTE = {
 
   function soonHtml(server) {
     return `
-      <div class="callout callout--warn">OCG ${esc(server.name)} isn't open yet. Its vote sites and rewards
-        go up here when it launches. Until then, you can vote for OCG Survival.</div>`;
+      <div class="callout callout--warn">OCG ${esc(server.name)} isn't open yet. Its vote rewards
+        go up here when it launches.</div>`;
   }
 
+  // Vote sites and the feed show every server at once, grouped by server. The tabs under
+  // "What voting gets you" only switch the rewards.
   function render() {
     const server = servers.find((s) => s.id === current);
     const def = VOTE[server.id];
+    const voting = servers.filter((s) => (VOTE[s.id].sites || []).length);
+    const waiting = servers.filter((s) => !(VOTE[s.id].sites || []).length);
+    const many = servers.length > 1;
+    const firstDef = voting.length ? VOTE[voting[0].id] : def;
+    const commands = voting.map((s) => VOTE[s.id].commands).find(Boolean);
     const tabs = servers.map((s) => `
       <button type="button" role="tab" data-vote-server="${esc(s.id)}" aria-selected="${s.id === current}"
         style="--accent: var(--${esc(s.id)})">OCG ${esc(s.name)}${s.status !== "live" ? ` <span class="pill">Soon</span>` : ""}</button>`).join("");
 
-    const hasSites = def.sites && def.sites.length;
-    root.style.setProperty("--accent", `var(--${server.id})`);
+    const groups = voting.map((s) => `
+      <div class="vote-group" style="--accent: var(--${esc(s.id)})">
+        ${many ? `<h3 class="vote-group__title">OCG <span>${esc(s.name)}</span></h3>` : ""}
+        ${sitesHtml(s, VOTE[s.id])}
+      </div>`).join("") + waiting.map((s) => `
+      <p class="vote-group__soon" style="--accent: var(--${esc(s.id)})">OCG <span>${esc(s.name)}</span>: vote sites open when it launches.</p>`).join("");
+
+    const feeds = voting.map((s) => `
+      <div class="side-card surface" style="--accent: var(--${esc(s.id)})">
+        <p class="label">Recent voters${voting.length > 1 ? ` · ${esc(s.name)}` : ""}</p>
+        <div data-voters>${feedHtml(s, VOTE[s.id])}</div>
+        <p class="muted small vote-feed-note">Updates every 15 minutes.</p>
+      </div>`).join("");
+
+    const hasRewards = (def.rewards || []).length || def.streak || def.tiers;
     root.innerHTML = `
       <div class="steps vote-steps">
         <div class="step surface">
           <h3>Pick a site</h3>
-          <p>Choose your server below, then click <b>Vote</b> on any site. Each one resets every ${def.cooldown || 24} hours.</p>
+          <p>Click <b>Vote</b> on any site below. Each one resets every ${firstDef.cooldown || 24} hours.</p>
         </div>
         <div class="step surface">
           <h3>Enter your name</h3>
@@ -239,25 +259,19 @@ window.VOTE = {
           <p>Rewards land in game right away. Offline? They wait for your next join.</p>
         </div>
       </div>
-      <div class="rank-tabs vote-tabs" role="tablist" aria-label="Vote for">${tabs}</div>
-      ${hasSites ? `
       <div class="vote-layout">
         <div class="vote-main">
           <div class="vote-sites-head">
             <h2>Vote sites</h2>
           </div>
-          ${sitesHtml(server, def)}
+          ${groups}
         </div>
         <aside class="vote-side">
-          <div class="side-card surface">
-            <p class="label">Recent voters</p>
-            <div data-voters>${feedHtml(server, def)}</div>
-            <p class="muted small vote-feed-note">Updates every 15 minutes.</p>
-          </div>
-          ${def.commands ? `
+          ${feeds}
+          ${commands ? `
           <div class="side-card surface">
             <p class="label">In game</p>
-            <ul class="vote-cmds">${def.commands.map(([c, d]) => `<li><span class="cmd">${esc(c)}</span><span>${esc(d)}</span></li>`).join("")}</ul>
+            <ul class="vote-cmds">${commands.map(([c, d]) => `<li><span class="cmd">${esc(c)}</span><span>${esc(d)}</span></li>`).join("")}</ul>
           </div>` : ""}
         </aside>
       </div>
@@ -268,7 +282,10 @@ window.VOTE = {
           <p>Everything below stacks: one vote on every site, every day, pays all of it.</p>
         </div>
       </div>
-      ${rewardsHtml(def)}` : soonHtml(server)}`;
+      ${many ? `<div class="rank-tabs vote-tabs" role="tablist" aria-label="Rewards for">${tabs}</div>` : ""}
+      <div class="vote-rewards" style="--accent: var(--${esc(server.id)})">
+        ${hasRewards ? rewardsHtml(def) : soonHtml(server)}
+      </div>`;
   }
 
   root.addEventListener("click", (e) => {
@@ -281,7 +298,7 @@ window.VOTE = {
     }
     const site = e.target.closest("[data-vote-site]");
     if (site) {
-      opened.set(current, site.dataset.voteSite);
+      opened.set(site.dataset.siteServer, site.dataset.voteSite);
       // Let the new tab open first, then show the tick.
       setTimeout(render, 50);
     }
