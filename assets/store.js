@@ -278,6 +278,13 @@
 
   const catBySlug = (slug) => categories.find((c) => c.slug === slug);
   const pkgsFor = (slug) => { const c = catBySlug(slug); return c ? sortByOrder(c.packages) : []; };
+  // Pairs a data.js tier or rank with its Tebex package by name (whole word, so "Charged"
+  // doesn't match "Overcharged"), falling back to position. The panel's drag order can
+  // differ from the ladder order.
+  const pkgNamed = (pkgs, name, i) => {
+    const rx = new RegExp("\\b" + String(name || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i");
+    return (name && pkgs.find((p) => rx.test(p.name || ""))) || pkgs[i];
+  };
 
   function addButton(p, label, extraClass) {
     if (!p) return `<button class="btn btn--block btn--ghost" type="button" disabled>Coming soon</button>`;
@@ -301,7 +308,7 @@
     document.querySelectorAll("[data-plus]").forEach((el) => {
       const pkgs = pkgsFor(CATS.plus);
       el.innerHTML = NET.plus.map((tier, i) => {
-        const p = pkgs[i];
+        const p = pkgNamed(pkgs, tier.name, i);
         return `
           <article class="ptier ptier--${i + 1}${tier.featured ? " ptier--featured" : ""} surface">
             ${tier.featured ? `<span class="ptier__flag">Recommended</span>` : ""}
@@ -345,7 +352,7 @@
           style="--accent: var(--${esc(s.id)})">OCG ${esc(s.name)}${s.status !== "live" ? ` <span class="pill">Soon</span>` : ""}</button>`).join("");
 
       const head = ladder.map((r, i) => {
-        const p = pkgs[i];
+        const p = pkgNamed(pkgs, r.name, i);
         return `<th scope="col" style="--rank:${esc(r.color)}">
           <div class="rank-head">
             <span class="rank-head__tag">[${esc(r.name)}]</span>
