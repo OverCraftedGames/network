@@ -264,6 +264,11 @@ window.VOTE = {
             <h2>Vote sites</h2>
           </div>
           ${sitesHtml()}
+          ${commands ? `
+          <div class="vote-ingame surface">
+            <p class="label">In game</p>
+            <ul class="vote-cmds">${commands.map(([c, d]) => `<li><span class="cmd">${esc(c)}</span><span>${esc(d)}</span></li>`).join("")}</ul>
+          </div>` : ""}
         </div>
         <aside class="vote-side">
           <div class="side-card surface">
@@ -271,11 +276,6 @@ window.VOTE = {
             <div data-voters>${feedHtml()}</div>
             <p class="muted small vote-feed-note">Updates every 15 minutes.</p>
           </div>
-          ${commands ? `
-          <div class="side-card surface">
-            <p class="label">In game</p>
-            <ul class="vote-cmds">${commands.map(([c, d]) => `<li><span class="cmd">${esc(c)}</span><span>${esc(d)}</span></li>`).join("")}</ul>
-          </div>` : ""}
         </aside>
       </div>
       <div class="section-head vote-rewards-head">
@@ -289,7 +289,25 @@ window.VOTE = {
       <div class="vote-rewards" style="--accent: var(--${esc(server.id)})">
         ${hasRewards ? rewardsHtml(def) : soonHtml(server)}
       </div>`;
+    fitFeed();
   }
+
+  // Side by side, the feed shows only as many voters as fit beside the vote sites, so the
+  // sidebar never runs longer than them. Stacked (narrow screens), it shows them all.
+  function fitFeed() {
+    const main = root.querySelector(".vote-main");
+    const card = root.querySelector(".vote-side .side-card");
+    if (!main || !card) return;
+    const voters = Array.from(card.querySelectorAll(".voter"));
+    voters.forEach((v) => { v.hidden = false; });
+    if (card.getBoundingClientRect().top - main.getBoundingClientRect().top > 4) return;
+    for (let n = voters.length - 1; n >= 3 && card.offsetHeight > main.offsetHeight; n--) {
+      voters[n].hidden = true;
+    }
+  }
+  let fitTimer = 0;
+  window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitFeed, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitFeed);
 
   root.addEventListener("click", (e) => {
     const tab = e.target.closest("[data-vote-server]");

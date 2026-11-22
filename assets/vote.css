@@ -45,8 +45,11 @@ a.vsite:hover { --nl: var(--line-strong); transform: translateY(-2px); border-co
 .voter__sites { padding: 1px 7px; background: rgba(255, 255, 255, 0.06); color: var(--text-2); font: 600 0.72rem var(--mono); }
 .voter__sites--all { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
 .vote-feed-note { margin: 12px 0 0 !important; font-size: 0.8rem !important; }
-.vote-cmds { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.vote-cmds li { display: grid; gap: 4px; justify-items: start; color: var(--text-2); font-size: 0.9rem; }
+/* "In game" strip under the vote sites. */
+.vote-ingame { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 18px; padding: 16px 20px; }
+.vote-ingame .label { margin: 0; }
+.vote-cmds { display: flex; flex-wrap: wrap; gap: 10px 24px; margin: 0; padding: 0; list-style: none; }
+.vote-cmds li { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: 0.9rem; }
 
 /* Rewards */
 .vote-rewards-head { margin-top: 72px; }
