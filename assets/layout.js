@@ -19,6 +19,7 @@
 
   const play = [
     ["home", "index.html", "Home"],
+    ["vote", "vote.html", "Vote"],
     ["survival", "survival.html", "Survival"],
     ["skyblock", "skyblock.html", "Skyblock"],
     ["wikis", "wikis.html", "Wikis"]
@@ -85,6 +86,7 @@
           <a href="survival.html">Survival</a>
           <a href="skyblock.html">Skyblock</a>
           <a href="wikis.html">Wikis</a>
+          <a href="vote.html">Vote</a>
           <a href="${discord}">Discord</a>
         </div>
         <div>

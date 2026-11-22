@@ -1,0 +1,13 @@
+{
+  "survival": [
+    { "name": "Notch", "uuid": "", "minutesAgo": 3, "sites": 6 },
+    { "name": "jeb_", "uuid": "", "minutesAgo": 17, "sites": 4 },
+    { "name": "Dinnerbone", "uuid": "", "minutesAgo": 42, "sites": 6 },
+    { "name": "Grumm", "uuid": "", "minutesAgo": 95, "sites": 2 },
+    { "name": "MHF_Alex", "uuid": "", "minutesAgo": 180, "sites": 6 },
+    { "name": "MHF_Steve", "uuid": "", "minutesAgo": 260, "sites": 1 },
+    { "name": "MHF_Villager", "uuid": "", "minutesAgo": 610, "sites": 5 },
+    { "name": "MHF_Herobrine", "uuid": "", "minutesAgo": 1500, "sites": 6 }
+  ],
+  "skyblock": []
+}

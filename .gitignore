@@ -1,2 +1,3 @@
 # Discord bot token for local news syncs. Never commit it.
 .env
+node_modules/

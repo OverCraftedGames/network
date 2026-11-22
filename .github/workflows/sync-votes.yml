@@ -1,0 +1,48 @@
+# Writes the latest voters to votes/recent.json (see scripts/sync-votes.mjs).
+# Needs one repository secret per server with VotingPlugin: VOTES_DB_SURVIVAL (and later
+# VOTES_DB_SKYBLOCK), each a mysql:// URL. Use a read-only database user if the host allows it.
+# A commit from this job redeploys GitHub Pages, so new voters show up within ~20 minutes.
+name: Sync recent voters from VotingPlugin
+
+on:
+  schedule:
+    - cron: "3,18,33,48 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-votes
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch recent votes
+        env:
+          VOTES_DB_SURVIVAL: ${{ secrets.VOTES_DB_SURVIVAL }}
+          VOTES_DB_SKYBLOCK: ${{ secrets.VOTES_DB_SKYBLOCK }}
+        # Until a secret is added, skip quietly instead of failing every 15 minutes.
+        run: |
+          if [ -z "$VOTES_DB_SURVIVAL$VOTES_DB_SKYBLOCK" ]; then
+            echo "::notice::No VOTES_DB_* secret set; skipping sync."
+            exit 0
+          fi
+          npm install --no-save --no-package-lock mysql2@3.11.0
+          node scripts/sync-votes.mjs
+      - name: Commit changes
+        run: |
+          if [ -n "$(git status --porcelain votes)" ]; then
+            git config user.name "votes-sync"
+            git config user.email "votes-sync@users.noreply.github.com"
+            git add votes
+            git commit -m "Sync recent voters"
+            git pull --rebase
+            git push
+          fi

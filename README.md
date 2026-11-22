@@ -14,6 +14,7 @@ touch this site.
 | Area | Page | What it is |
 |---|---|---|
 | Play | `index.html` | Home: banner with the network IP, a news feed mirrored from Discord, and a sidebar with server status, the Discord widget and a store spotlight |
+| Play | `vote.html` | Vote sites, how to vote, rewards and a recent voter feed, with server tabs (`#survival`, `#skyblock`) |
 | Play | `survival.html`, `skyblock.html` | One page per server (each server has its own accent colour) |
 | Play | `wikis.html` | Wiki links for each server |
 | Store | `store.html` | Store hub: OCG+, Ranks and Credits, plus current sales |
@@ -53,6 +54,35 @@ Setup (once): in the GitHub repo go to Settings > Secrets and variables > Action
 repository secret, name it `TEBEX_SECRET`, and paste the Tebex **secret** key (Tebex >
 Integrations > Game Servers). Never put this key in `config.js` or any other site file: it
 can take payments and run commands. Then run the workflow once from the Actions tab.
+
+## Vote page
+
+`vote.html` is drawn by `assets/vote.js` (styles in `assets/vote.css`). The vote sites and
+rewards for each server are at the top of `vote.js` and mirror the server config, so update
+them together: sites and per-vote rewards in VotingPlugin `VoteSites.yml`, the all-sites bonus
+and vote party in `SpecialRewards.yml`, the streak in CarbonSpend `vote-streak`, and the tiers
+in CMI `Ranks.yml`. Skyblock shows "coming soon" until it has sites.
+
+The Vote buttons tick off in the visitor's browser for 24 hours after they open a link. That's
+only a reminder; it doesn't know whether they finished voting.
+
+**Recent voters.** The feed reads `votes/recent.json`: up to 12 voters per server, name, UUID,
+latest vote time and how many sites they voted on in the 24 hours up to it.
+`scripts/sync-votes.mjs` builds it from VotingPlugin's MySQL table (`VotingPlugin_Users`,
+columns `uuid`, `PlayerName`, `LastVotes`), and `.github/workflows/sync-votes.yml` runs it every
+15 minutes and commits any change. Demo mode shows example names from `assets/demo-votes.json`.
+
+Setup (once):
+1. If the database host lets you, make a read-only MySQL user for the vote database (SELECT
+   only). Otherwise the plugin's own user works, but that secret can then change vote data.
+2. Make sure the database accepts remote connections from GitHub's runners (any IP).
+3. Add a repository secret `VOTES_DB_SURVIVAL` with the value
+   `mysql://user:password@host:3306/database` (URL-encode the password if it has symbols).
+   Add `VOTES_DB_SKYBLOCK` the same way once Skyblock runs VotingPlugin.
+4. Run the workflow once from the Actions tab and check its log for the player count.
+
+Locally: `npm install --no-save mysql2@3.11.0`, put `VOTES_DB_SURVIVAL` in `.env`, then
+`node --env-file=.env scripts/sync-votes.mjs`.
 
 ## News feed (mirrored from Discord)
 
