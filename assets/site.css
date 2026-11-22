@@ -439,9 +439,9 @@ a.tile:hover { transform: translateY(-2px); border-color: var(--line-strong); te
   content: ""; position: absolute; inset: 0 0 auto 0; height: 170px; pointer-events: none;
   background: radial-gradient(420px 170px at 50% -50px, color-mix(in srgb, var(--tier) 24%, transparent), transparent 70%);
 }
-.ptier--1 { --tier: #ffe94d; }
-.ptier--2 { --tier: #ffb21e; }
-.ptier--3 { --tier: #ff5fc8; }
+.ptier--1 { --tier: #FFC800; }
+.ptier--2 { --tier: #FF2E8A; }
+.ptier--3 { --tier: #0FB5A5; }
 .ptier--featured { border-color: var(--line-strong); box-shadow: 0 0 70px rgba(58, 255, 245, 0.14); }
 .ptier__flag {
   position: absolute; top: 18px; right: 18px;

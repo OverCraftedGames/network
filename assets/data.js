@@ -33,7 +33,7 @@ window.NETWORK = {
   // Keys are named by tier (T1 to T4), not crate name, because each server names its crates differently.
   // Credits + keys are worth about half of a Credits pack at the same price (keys counted at
   // their coin-shop price: T1 75, T2 125, T4 350). More perks get added over time.
-  // Badge: one bolt by the name in chat and tab, coloured by tier (yellow / gold / pink).
+  // Badge: one bolt by the name in chat and tab, coloured by tier: yellow (Charged), pink (Overcharged), teal (Supercharged).
   plus: [
     {
       name: "Charged",
@@ -52,7 +52,7 @@ window.NETWORK = {
         ["coin", "<b>425 Credits</b> every month"],
         ["key", "<b>1 T2 crate key</b> every month"],
         ["vote", "<b>Double vote keys</b>"],
-        ["gem", "A <b>gold bolt</b> by your name in chat and tab"]
+        ["gem", "A <b>pink bolt</b> by your name in chat and tab"]
       ]
     },
     {
@@ -63,7 +63,7 @@ window.NETWORK = {
         ["key", "<b>1 T4 crate key</b> every month"],
         ["vote", "<b>Double vote keys</b>"],
         ["check", "<b>/fly</b> in your own claims"],
-        ["gem", "A <b>pink bolt</b> by your name in chat and tab"]
+        ["gem", "A <b>teal bolt</b> by your name in chat and tab"]
       ]
     }
   ],
@@ -72,15 +72,17 @@ window.NETWORK = {
   // Only the perks differ per server. "ladder" is in Tebex order (cheapest first);
   // "perks.network" applies everywhere, the other keys are per server (matching servers[].id).
   // A perk value is shown as written; true shows a tick, false or "" shows a dash.
-  // Chess ladder decided 2026-11-21: Pawn $10, Knight $25, Bishop $50, Rook $100, King $150.
+  // Ladder locked 2026-11-21: Glow, Shine, Dazzle, Prism, Radiant (LuckPerms groups glow to radiant).
+  // Colours match the neon rank tags in game. Prices ($10 / $25 / $50 / $100 / $150) and the
+  // perks below are still PLACEHOLDER.
   ranks: {
     ladder: [
-      { name: "Pawn", color: "#a9b1b6" },
-      { name: "Knight", color: "#6fb6e8" },
-      { name: "Bishop", color: "#b88cf0" },
-      { name: "Rook", color: "#f06a5a" },
+      { name: "Glow", color: "#C6FF4D" },
+      { name: "Shine", color: "#4DF0FF" },
+      { name: "Dazzle", color: "#9D5CFF" },
+      { name: "Prism", color: "#FF8A3D" },
       // Top rank. Carbon+ Lifetime holders are moved to this rank (see README, Going live).
-      { name: "King", color: "#ffcf3a" }
+      { name: "Radiant", color: "#FF4DB8" }
     ],
     perks: {
       network: [
@@ -89,7 +91,7 @@ window.NETWORK = {
           ["Rank role in Discord", [true, true, true, true, true]]
         ]}
       ],
-      // King must cover everything Carbon+ Lifetime gave (Lifetime holders move to it).
+      // Radiant must cover everything Carbon+ Lifetime gave (Lifetime holders move to it).
       survival: [
         { title: "Limits", perks: [
           ["Homes", ["5", "8", "10", "15", "20"]],

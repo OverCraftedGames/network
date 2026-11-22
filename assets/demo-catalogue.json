@@ -95,9 +95,9 @@
       "packages": [
         {
           "id": 9200001,
-          "name": "Pawn",
+          "name": "Glow",
           "description": "",
-          "image": "assets/icons/rank-copper.svg",
+          "image": "assets/icons/rank-glow.svg",
           "type": "single",
           "category": {
             "id": 9000002,
@@ -114,9 +114,9 @@
         },
         {
           "id": 9200002,
-          "name": "Knight",
+          "name": "Shine",
           "description": "",
-          "image": "assets/icons/rank-iron.svg",
+          "image": "assets/icons/rank-shine.svg",
           "type": "single",
           "category": {
             "id": 9000002,
@@ -133,9 +133,9 @@
         },
         {
           "id": 9200003,
-          "name": "Bishop",
+          "name": "Dazzle",
           "description": "",
-          "image": "assets/icons/rank-gold.svg",
+          "image": "assets/icons/rank-dazzle.svg",
           "type": "single",
           "category": {
             "id": 9000002,
@@ -152,9 +152,9 @@
         },
         {
           "id": 9200004,
-          "name": "Rook",
+          "name": "Prism",
           "description": "",
-          "image": "assets/icons/rank-diamond.svg",
+          "image": "assets/icons/rank-prism.svg",
           "type": "single",
           "category": {
             "id": 9000002,
@@ -171,9 +171,9 @@
         },
         {
           "id": 9200005,
-          "name": "King",
+          "name": "Radiant",
           "description": "",
-          "image": "assets/icons/rank-emerald.svg",
+          "image": "assets/icons/rank-radiant.svg",
           "type": "single",
           "category": {
             "id": 9000002,
