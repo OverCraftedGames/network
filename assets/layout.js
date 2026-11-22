@@ -8,7 +8,7 @@
   const body = document.body;
   const page = body.dataset.page || "";
   const inStore = body.dataset.area === "store";
-  const discord = cfg.discord || "https://discord.gg/carboncraft";
+  const discord = cfg.discord || "https://discord.gg/ocg";
 
   const link = ([key, href, label, cls]) => {
     const current = key && key === page ? ' aria-current="page"' : "";

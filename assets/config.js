@@ -14,7 +14,7 @@ window.STORE_CONFIG = {
   },
   // Address players join with. Points at Survival until the Velocity proxy is up.
   networkIp: "play.ocgames.xyz",
-  discord: "https://discord.gg/carboncraft",
+  discord: "https://discord.gg/ocg",
   // Discord widget on the home page: invite code (for member counts) and server id (for
   // the online list). The Server Widget must stay on in Discord's server settings.
   discordInvite: "carboncraft",
