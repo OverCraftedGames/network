@@ -2,6 +2,7 @@
 .vote-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; align-items: start; }
 .vote-side { display: grid; gap: 18px; position: sticky; top: 92px; }
 .vote-steps { margin-bottom: 40px; }
+.vote-tabs { margin-bottom: 24px; }
 .vote-steps .step::before { color: var(--accent); }
 .vote-steps .step h3 { font-size: 1.15rem; }
 .vote-steps .step p { font-size: 0.95rem; }

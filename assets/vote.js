@@ -225,22 +225,22 @@ window.VOTE = {
     const hasSites = def.sites && def.sites.length;
     root.style.setProperty("--accent", `var(--${server.id})`);
     root.innerHTML = `
-      <div class="rank-tabs" role="tablist" aria-label="Vote for">${tabs}</div>
+      <div class="steps vote-steps">
+        <div class="step surface">
+          <h3>Pick a site</h3>
+          <p>Choose your server below, then click <b>Vote</b> on any site. Each one resets every ${def.cooldown || 24} hours.</p>
+        </div>
+        <div class="step surface">
+          <h3>Enter your name</h3>
+          <p>Type your username exactly as it is in game. On Bedrock, start it with a dot: <span class="cmd">.Steve</span></p>
+        </div>
+        <div class="step surface">
+          <h3>Get rewarded</h3>
+          <p>Rewards land in game right away. Offline? They wait for your next join.</p>
+        </div>
+      </div>
+      <div class="rank-tabs vote-tabs" role="tablist" aria-label="Vote for">${tabs}</div>
       ${hasSites ? `
-          <div class="steps vote-steps">
-            <div class="step surface">
-              <h3>Pick a site</h3>
-              <p>Click <b>Vote</b> on any site below. Each one resets every ${def.cooldown || 24} hours.</p>
-            </div>
-            <div class="step surface">
-              <h3>Enter your name</h3>
-              <p>Type your username exactly as it is in game. On Bedrock, start it with a dot: <span class="cmd">.Steve</span></p>
-            </div>
-            <div class="step surface">
-              <h3>Get rewarded</h3>
-              <p>Rewards land in game right away. Offline? They wait for your next join.</p>
-            </div>
-          </div>
       <div class="vote-layout">
         <div class="vote-main">
           <div class="vote-sites-head">
