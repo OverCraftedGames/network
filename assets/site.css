@@ -1007,3 +1007,21 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
   .tab, .server-switch a, .rank-tabs button, .icon-btn, .coupon button, .gift button,
   a.surface, .card__art):focus-visible { outline-offset: -4px; }
 .btn:focus-visible, .basket-btn:focus-visible { outline-color: currentColor; }
+
+/* Recent supporters (store hub): one row of player heads; swipes sideways on narrow screens. */
+.recent {
+  display: flex; gap: 12px;
+  margin: 0; padding: 0 0 6px; list-style: none;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin;
+}
+.recent__item {
+  flex: 1 0 128px; scroll-snap-align: start;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 16px 10px 14px; min-width: 0;
+}
+.recent__item img { width: 56px; height: 56px; image-rendering: pixelated; }
+.recent__item span {
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-weight: 600; font-size: 0.92rem;
+}
+@media (max-width: 640px) { .recent__item { flex-basis: 112px; } }

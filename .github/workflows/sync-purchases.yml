@@ -1,0 +1,45 @@
+# Writes the latest store buyers to purchases/recent.json (see scripts/sync-purchases.mjs).
+# Needs one repository secret: TEBEX_SECRET (the Tebex secret key, never the public token).
+# A commit from this job redeploys GitHub Pages, so new buyers show up within ~20 minutes.
+name: Sync recent purchases from Tebex
+
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-purchases
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch recent payments
+        env:
+          TEBEX_SECRET: ${{ secrets.TEBEX_SECRET }}
+        # Until the secret is added, skip quietly instead of failing every 15 minutes.
+        run: |
+          if [ -z "$TEBEX_SECRET" ]; then
+            echo "::notice::TEBEX_SECRET not set; skipping sync."
+            exit 0
+          fi
+          node scripts/sync-purchases.mjs
+      - name: Commit changes
+        run: |
+          if [ -n "$(git status --porcelain purchases)" ]; then
+            git config user.name "purchases-sync"
+            git config user.email "purchases-sync@users.noreply.github.com"
+            git add purchases
+            git commit -m "Sync recent purchases"
+            git pull --rebase
+            git push
+          fi

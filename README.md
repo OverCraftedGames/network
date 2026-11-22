@@ -41,6 +41,19 @@ Anything marked PLACEHOLDER is example content until the real values are decided
 includes the OCG+ tier names and contents, the rank ladder, prices and perks, the Skyblock
 features, and the Credits uses on Skyblock.
 
+## Recent supporters (store page)
+
+The "Recent supporters" row on `store.html` reads `purchases/recent.json`: up to 12 recent
+buyers, one per player, name and UUID only. `scripts/sync-purchases.mjs` builds it from the
+Tebex Plugin API, and a GitHub Action (`.github/workflows/sync-purchases.yml`) runs it every
+15 minutes and commits any change. The row stays hidden while the file is empty. Demo mode
+shows example names from `assets/demo-recent.json`.
+
+Setup (once): in the GitHub repo go to Settings > Secrets and variables > Actions > New
+repository secret, name it `TEBEX_SECRET`, and paste the Tebex **secret** key (Tebex >
+Integrations > Game Servers). Never put this key in `config.js` or any other site file: it
+can take payments and run commands. Then run the workflow once from the Actions tab.
+
 ## News feed (mirrored from Discord)
 
 The home page feed reads `news/posts.json`, which is generated from the Discord

@@ -955,10 +955,31 @@
     });
   }
 
+  // Recent supporters row (store hub). purchases/recent.json is written by
+  // scripts/sync-purchases.mjs; demo mode shows example names. Hidden when there's nobody.
+  async function renderRecent() {
+    const list = $("recent-buyers");
+    if (!list) return;
+    try {
+      const res = await fetch(demo ? "assets/demo-recent.json" : "purchases/recent.json", { cache: "no-cache" });
+      if (!res.ok) return;
+      const buyers = (await res.json()).filter((b) => b && b.name).slice(0, 8);
+      if (!buyers.length) return;
+      list.innerHTML = buyers.map((b) => `
+        <li class="recent__item surface">
+          <img src="https://mc-heads.net/avatar/${encodeURIComponent(b.uuid || b.name)}/64" alt="" width="56" height="56" loading="lazy"
+            onerror="this.onerror=null;this.src='https://mc-heads.net/avatar/MHF_Steve/64'">
+          <span>${esc(b.name)}</span>
+        </li>`).join("");
+      $("recent-section").hidden = false;
+    } catch (e) { /* the row is optional */ }
+  }
+
   async function start() {
     renderPlayer();
     renderServers();
     renderCreditUses();
+    renderRecent();
     expireOffers();
     reveal();
     loadStatus();
