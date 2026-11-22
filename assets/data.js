@@ -10,7 +10,7 @@ window.NETWORK = {
     {
       id: "survival",
       name: "Survival",
-      page: "survival.html",
+      page: "survival",
       status: "live",
       ip: "play.ocgames.xyz",
       wiki: "https://wiki.carboncraft.xyz/",
@@ -20,7 +20,7 @@ window.NETWORK = {
     {
       id: "skyblock",
       name: "Skyblock",
-      page: "skyblock.html",
+      page: "skyblock",
       status: "soon",
       ip: "",
       wiki: "",

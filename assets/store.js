@@ -269,11 +269,11 @@
   // all-packages page on that tab.
   function catHref(slug) {
     const pages = {
-      [CATS.plus]: "plus.html",
-      [CATS.ranks]: "ranks.html",
-      [CATS.credits]: "credits.html"
+      [CATS.plus]: "plus",
+      [CATS.ranks]: "ranks",
+      [CATS.credits]: "credits"
     };
-    return pages[slug] || "shop.html#" + slug;
+    return pages[slug] || "shop#" + slug;
   }
 
   const catBySlug = (slug) => categories.find((c) => c.slug === slug);
@@ -423,7 +423,7 @@
           return `<li><a href="${esc(catHref(d.slug))}">${esc(n.title)}${n.variant ? " · " + esc(n.variant) : ""}</a>
             <span><s>${money(d.p.total_price + d.p.discount, d.p.currency)}</s> ${money(d.p.total_price, d.p.currency)}</span></li>`;
         }).join("")}</ul>
-        <a class="btn btn--block btn--sm" href="store.html">Shop the sale</a>`;
+        <a class="btn btn--block btn--sm" href="store">Shop the sale</a>`;
       return;
     }
     const tiers = pkgsFor(CATS.plus);
@@ -433,7 +433,7 @@
       <h3>Loot every month</h3>
       <p>Crate keys, Credits and a new cosmetic every month, on every server.</p>
       ${from ? `<p class="spot-from">From <b>${money(from, tiers[0].currency)}</b> / month</p>` : ""}
-      <a class="btn btn--block btn--sm" href="plus.html">See the tiers</a>`;
+      <a class="btn btn--block btn--sm" href="plus">See the tiers</a>`;
   }
 
   function renderStorePages() {
@@ -750,7 +750,7 @@
     }
     els.forWho.textContent = username ? "Delivered to " + username : "No username set yet";
     if (!items.length) {
-      els.lines.innerHTML = `<li class="empty"><img src="assets/logo.png" alt="">Your basket is empty.<a href="store.html">Browse the store</a></li>`;
+      els.lines.innerHTML = `<li class="empty"><img src="assets/logo.png" alt="">Your basket is empty.<a href="store">Browse the store</a></li>`;
     } else {
       els.lines.innerHTML = items.map((x) => {
         const known = packages.get(String(x.id));

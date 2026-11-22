@@ -18,24 +18,24 @@
   };
 
   const play = [
-    ["home", "index.html", "Home"],
-    ["vote", "vote.html", "Vote"],
-    ["survival", "survival.html", "Survival"],
-    ["skyblock", "skyblock.html", "Skyblock"],
-    ["wikis", "wikis.html", "Wikis"]
+    ["home", "./", "Home"],
+    ["vote", "vote", "Vote"],
+    ["survival", "survival", "Survival"],
+    ["skyblock", "skyblock", "Skyblock"],
+    ["wikis", "wikis", "Wikis"]
   ];
-  const storeLink = ["", "store.html", "Store", "nav-store"];
+  const storeLink = ["", "store", "Store", "nav-store"];
   const storeNav = [
-    ["store", "store.html", "Store home"],
-    ["plus", "plus.html", "OCG+"],
-    ["ranks", "ranks.html", "Ranks"],
-    ["credits", "credits.html", "Credits"],
-    ["shop", "shop.html", "All packages"],
-    ["rewards", "rewards.html", "Rewards"],
-    ["support", "support.html", "Support"]
+    ["store", "store", "Store home"],
+    ["plus", "plus", "OCG+"],
+    ["ranks", "ranks", "Ranks"],
+    ["credits", "credits", "Credits"],
+    ["shop", "shop", "All packages"],
+    ["rewards", "rewards", "Rewards"],
+    ["support", "support", "Support"]
   ];
 
-  const storeTop = `<a href="store.html" class="nav-store"${inStore ? ' aria-current="page"' : ""}>Store</a>`;
+  const storeTop = `<a href="store" class="nav-store"${inStore ? ' aria-current="page"' : ""}>Store</a>`;
   const navHtml = play.map(link).join("") + `<span class="topnav__sep" aria-hidden="true"></span>` +
     storeTop + link(["", discord, "Discord"]);
   const mobileHtml = play.map(link).join("") + storeTop + link(["", discord, "Discord"]);
@@ -44,7 +44,7 @@
   header.className = "topbar";
   header.innerHTML = `
     <div class="wrap topbar__inner">
-      <a class="brand" href="index.html">
+      <a class="brand" href="./">
         <img src="assets/logo.png" alt="" width="38" height="38">
         <span>OCG <b>Network</b></span>
       </a>
@@ -74,7 +74,7 @@
     <div class="wrap footer__inner">
       <div class="footer__cols">
         <div>
-          <a class="brand" href="index.html">
+          <a class="brand" href="./">
             <img src="assets/logo.png" alt="" width="34" height="34">
             <span>OCG <b>Network</b></span>
           </a>
@@ -83,29 +83,29 @@
         </div>
         <div>
           <h3>Play</h3>
-          <a href="survival.html">Survival</a>
-          <a href="skyblock.html">Skyblock</a>
-          <a href="wikis.html">Wikis</a>
-          <a href="vote.html">Vote</a>
+          <a href="survival">Survival</a>
+          <a href="skyblock">Skyblock</a>
+          <a href="wikis">Wikis</a>
+          <a href="vote">Vote</a>
           <a href="${discord}">Discord</a>
         </div>
         <div>
           <h3>Store</h3>
-          <a href="plus.html">OCG+</a>
-          <a href="ranks.html">Ranks</a>
-          <a href="credits.html">Credits</a>
+          <a href="plus">OCG+</a>
+          <a href="ranks">Ranks</a>
+          <a href="credits">Credits</a>
           <a href="https://checkout.tebex.io/payment-history/login">Manage subscriptions</a>
         </div>
         <div>
           <h3>Help</h3>
-          <a href="support.html">Support</a>
+          <a href="support">Support</a>
           <a href="https://www.tebex.io/support-customer">Tebex customer support</a>
           <a href="mailto:${cfg.email || "contact@ocgames.xyz"}">Email us</a>
         </div>
         <div>
           <h3>Legal</h3>
-          <a href="terms.html">Terms &amp; Conditions</a>
-          <a href="purchase-agreement.html">Purchase Agreement</a>
+          <a href="terms">Terms &amp; Conditions</a>
+          <a href="purchase-agreement">Purchase Agreement</a>
           <a href="https://checkout.tebex.io/privacy">Privacy Policy</a>
           <a href="https://checkout.tebex.io/impressum">Impressum</a>
         </div>
@@ -148,8 +148,8 @@
         <div class="total"><span>Total</span><b id="basket-total">$0.00</b></div>
         <button class="btn btn--block" id="checkout-btn" type="button" disabled>Checkout securely</button>
         <p class="muted small">Payment opens in a secure Tebex window. By checking out you
-          agree to the <a href="terms.html">Terms</a> and
-          <a href="purchase-agreement.html">Purchase Agreement</a>.</p>
+          agree to the <a href="terms">Terms</a> and
+          <a href="purchase-agreement">Purchase Agreement</a>.</p>
       </div>
     </aside>
 

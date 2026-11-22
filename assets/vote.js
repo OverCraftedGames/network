@@ -1,4 +1,4 @@
-// Vote page   (vote.html). The network has one listing on each vote site, so the sites and the
+// Vote page (vote.html). The network has one listing on each vote site, so the sites and the
 // recent voter feed are shared by every server. Only the rewards differ per server; the server
 // tabs under "What voting gets you" switch them (#survival, #skyblock). Server names and status
 // come from data.js.

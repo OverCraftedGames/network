@@ -124,8 +124,12 @@ The sidebar's Discord card uses the public invite and Server Widget APIs (`disco
 
 ## Run it
 
-Preview config `network` in `CarbonCraft/.claude/launch.json` serves this folder on
-http://127.0.0.1:8020.
+`node scripts/serve.mjs` serves this folder on http://127.0.0.1:8020 (pass another port as
+the first argument). Preview config `network` in `CarbonCraft/.claude/launch.json` runs it.
+
+Links use clean URLs (`vote`, not `vote.html`; home is `./`), which GitHub Pages serves from the
+matching `.html` file. `serve.mjs` does the same locally; a plain static server such as Python's
+`http.server` doesn't, so links 404 there. Both forms work live, so old `.html` links keep working.
 
 The site stays in **preview mode** while `forceDemo: true` is set in `config.js`. In
 preview mode it reads `assets/demo-catalogue.json`, keeps the basket in the browser and
