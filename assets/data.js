@@ -13,7 +13,7 @@ window.NETWORK = {
       page: "survival",
       status: "live",
       ip: "play.ocgames.xyz",
-      wiki: "https://wiki.carboncraft.xyz/",
+      wiki: "https://wiki.ocgames.xyz/",
       blurb: "Survival with a player economy, custom gear, land claims and a crew to play with.",
       tags: ["Economy", "Claims", "Custom items", "Factions"]
     },
