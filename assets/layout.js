@@ -67,11 +67,6 @@
       </nav>
     </div>` : ""}`;
 
-  header.insertAdjacentHTML("afterend", `
-    <div class="demo-banner" id="demo-banner" hidden>
-      Preview: prices and packages come from a saved example catalogue, and checkout is turned off.
-    </div>`);
-
   const footer = document.getElementById("site-footer");
   footer.className = "footer";
   footer.innerHTML = `

@@ -167,13 +167,6 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -0.015em; }
 .storebar a:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); text-decoration: none; }
 .storebar a[aria-current="page"] { color: var(--teal-ink); background: var(--teal); }
 
-.demo-banner {
-  padding: 10px 16px;
-  background: rgba(255, 210, 63, 0.09); color: var(--sale);
-  border-bottom: 1px solid rgba(255, 210, 63, 0.28);
-  text-align: center; font-size: 0.9rem;
-}
-
 /* Hero */
 .hero { position: relative; overflow: hidden; }
 .hero__inner {

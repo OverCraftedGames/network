@@ -129,7 +129,6 @@
 
   async function loadCatalogue() {
     if (demo) {
-      if (document.body.dataset.area === "store") document.getElementById("demo-banner").hidden = false;
       const res = await fetch("assets/demo-catalogue.json");
       return (await res.json()).data;
     }
