@@ -1,69 +1,74 @@
-// Vote page (vote.html): vote sites, rewards and the recent voter feed for each server, picked
-// with the server tabs (#survival, #skyblock). Server names and status come from data.js.
+// Vote page   (vote.html). The network has one listing on each vote site, so the sites and the
+// recent voter feed are shared by every server. Only the rewards differ per server; the server
+// tabs under "What voting gets you" switch them (#survival, #skyblock). Server names and status
+// come from data.js.
 //
-// The vote sites and rewards below mirror each server's config. Keep them in step when it changes:
+// The vote sites and rewards below mirror the server config. Keep them in step when it changes:
 //   Sites, per-vote rewards       VotingPlugin/VoteSites.yml
 //   All-sites bonus, vote party   VotingPlugin/SpecialRewards.yml + Rewards/AllSitesKeys.yml
 //   Vote streak                   CarbonCore/CarbonSpend/config.yml (vote-streak)
 //   Vote tiers                    CMI/Settings/Ranks.yml (Votes: per tier)
 //
-// The feed reads votes/recent.json, written every 15 minutes by scripts/sync-votes.mjs.
+// The feed reads votes/recent.json, written every 15 minutes by scripts/sync-votes.mjs. It has
+// one list per server database; the page merges them into one feed.
 // Demo mode reads assets/demo-votes.json instead.
 window.VOTE = {
-  survival: {
-    sites: [
-      { id: "MinecraftServers_org", name: "MinecraftServers.org", url: "https://minecraftservers.org/vote/690376" },
-      { id: "MCSL", name: "Minecraft Server List", url: "https://minecraft-server-list.com/server/521849/vote/" },
-      { id: "Minecraft_Buzz", name: "Minecraft.Buzz", url: "https://minecraft.buzz/vote/carboncraft" },
-      { id: "TopG_org", name: "TopG", url: "https://topg.org/minecraft-servers/server-684319" },
-      { id: "minecraft-serverlist-com", name: "Minecraft-Serverlist.com", url: "https://minecraft-serverlist.com/server/5848/vote" },
-      { id: "TopMinecraftServers", name: "Top Minecraft Servers", url: "https://topminecraftservers.org/vote/44378" }
-    ],
-    // Hours between votes on one site.
-    cooldown: 24,
-    rewards: [
-      {
-        label: "Every vote",
-        title: "Each site, every day",
-        items: [["coin", "<b>$50</b> in-game money"], ["check", "<b>10</b> claim blocks"]],
-        note: "That's up to $300 and 60 claim blocks a day across all six sites."
+  sites: [
+    { id: "MinecraftServers_org", name: "MinecraftServers.org", url: "https://minecraftservers.org/vote/690376" },
+    { id: "MCSL", name: "Minecraft Server List", url: "https://minecraft-server-list.com/server/521849/vote/" },
+    { id: "Minecraft_Buzz", name: "Minecraft.Buzz", url: "https://minecraft.buzz/vote/carboncraft" },
+    { id: "TopG_org", name: "TopG", url: "https://topg.org/minecraft-servers/server-684319" },
+    { id: "minecraft-serverlist-com", name: "Minecraft-Serverlist.com", url: "https://minecraft-serverlist.com/server/5848/vote" },
+    { id: "TopMinecraftServers", name: "Top Minecraft Servers", url: "https://topminecraftservers.org/vote/44378" }
+  ],
+  // Hours between votes on one site.
+  cooldown: 24,
+  commands: [
+    ["/vote", "the vote links in game"],
+    ["/vote next", "when each site is ready again"],
+    ["/votetiers", "your tier and what's next"]
+  ],
+  // Rewards per server.
+  servers: {
+    survival: {
+      rewards: [
+        {
+          label: "Every vote",
+          title: "Each site, every day",
+          items: [["coin", "<b>$50</b> in-game money"], ["check", "<b>10</b> claim blocks"]],
+          note: "That's up to $300 and 60 claim blocks a day across all six sites."
+        },
+        {
+          label: "All sites",
+          title: "All six in one day",
+          items: [["key", "<b>2 Vote Keys</b>"], ["key", "<b>2 more</b> with double vote keys"]],
+          note: "Double vote keys come with any OCG+ tier, or the Prism and Radiant ranks. You also get a shout-out in chat."
+        },
+        {
+          label: "Vote party",
+          title: "Every 100 server votes",
+          items: [["key", "A <b>T2 crate key</b> for everyone online"]],
+          note: "Every vote from every player counts towards it. Be online when it hits 100."
+        }
+      ],
+      streak: {
+        days: [2, 4, 6, 8, 10, 12, 14],
+        windowHours: 36,
+        text: "A day counts once you've voted on all six sites. Finish the next day within 36 hours, or the streak starts again from day 1. After day 7 a fresh week begins."
       },
-      {
-        label: "All sites",
-        title: "All six in one day",
-        items: [["key", "<b>2 Vote Keys</b>"], ["key", "<b>2 more</b> with double vote keys"]],
-        note: "Double vote keys come with any OCG+ tier, or the Prism and Radiant ranks. You also get a shout-out in chat."
-      },
-      {
-        label: "Vote party",
-        title: "Every 100 server votes",
-        items: [["key", "A <b>T2 crate key</b> for everyone online"]],
-        note: "Every vote from every player counts towards it. Be online when it hits 100."
+      tiers: {
+        every: 35,
+        count: 50,
+        color: "#C0CED5",
+        perTier: ["<b>$2,000</b> in-game money", "<b>100</b> claim blocks"],
+        // Every fifth tier unlocks its numeral as a chat suffix.
+        suffixEvery: 5,
+        extras: "Some tiers also add more homes, player warps, auction house slots and a player vault."
       }
-    ],
-    streak: {
-      days: [2, 4, 6, 8, 10, 12, 14],
-      windowHours: 36,
-      text: "A day counts once you've voted on all six sites. Finish the next day within 36 hours, or the streak starts again from day 1. After day 7 a fresh week begins."
     },
-    tiers: {
-      every: 35,
-      count: 50,
-      color: "#C0CED5",
-      perTier: ["<b>$2,000</b> in-game money", "<b>100</b> claim blocks"],
-      // Every fifth tier unlocks its numeral as a chat suffix.
-      suffixEvery: 5,
-      extras: "Some tiers also add more homes, player warps, auction house slots and a player vault."
-    },
-    commands: [
-      ["/vote", "the vote links in game"],
-      ["/vote next", "when each site is ready again"],
-      ["/votetiers", "your tier and what's next"]
-    ]
-  },
-  skyblock: {
-    // No vote sites yet. Fill this in like Survival when Skyblock opens.
-    sites: []
+    skyblock: {
+      // No rewards yet. Fill this in like Survival when Skyblock opens.
+    }
   }
 };
 
@@ -94,7 +99,10 @@ window.VOTE = {
     set(server, site) { try { localStorage.setItem(this.key(server, site), String(Date.now())); } catch (e) { /* optional */ } }
   };
 
-  const servers = NET.servers.filter((s) => VOTE[s.id]);
+  const REWARDS = VOTE.servers || {};
+  const SITES = VOTE.sites || [];
+  const COOLDOWN = VOTE.cooldown || 24;
+  const servers = NET.servers.filter((s) => REWARDS[s.id]);
   if (!servers.length) return;
   const fromHash = location.hash.slice(1);
   let current = servers.some((s) => s.id === fromHash) ? fromHash
@@ -118,14 +126,15 @@ window.VOTE = {
     return left > 0 ? Math.ceil(left / 3600000) : 0;
   }
 
-  function sitesHtml(server, def) {
-    const cooldown = def.cooldown || 24;
-    const done = def.sites.filter((s) => hoursLeft(server.id, s.id, cooldown) > 0).length;
-    const cards = def.sites.map((s, i) => {
-      const left = hoursLeft(server.id, s.id, cooldown);
+  function sitesHtml() {
+    const def = { sites: SITES };
+    const cooldown = COOLDOWN;
+    const done = SITES.filter((s) => hoursLeft("network", s.id, cooldown) > 0).length;
+    const cards = SITES.map((s, i) => {
+      const left = hoursLeft("network", s.id, cooldown);
       return `
         <a class="vsite surface${left ? " vsite--done" : ""}" href="${esc(s.url)}" target="_blank" rel="noopener"
-          data-vote-site="${esc(s.id)}" data-site-server="${esc(server.id)}">
+          data-vote-site="${esc(s.id)}">
           <span class="vsite__num">${String(i + 1).padStart(2, "0")}</span>
           <span class="vsite__name">${esc(s.name)}</span>
           <span class="vsite__state">${left
@@ -136,8 +145,8 @@ window.VOTE = {
     }).join("");
     return `
       <div class="vote-progress">
-        <div class="vote-progress__bar" style="--done:${done / def.sites.length}"><span></span></div>
-        <span class="vote-progress__text"><b>${done}</b> of ${def.sites.length} opened in the last ${cooldown}h</span>
+        <div class="vote-progress__bar" style="--done:${done / SITES.length}"><span></span></div>
+        <span class="vote-progress__text"><b>${done}</b> of ${SITES.length} opened in the last ${cooldown}h</span>
       </div>
       <div class="vsites">${cards}</div>
       <p class="muted small vote-note">The ticks only remember which links you opened in this browser.
@@ -191,11 +200,18 @@ window.VOTE = {
     return `<div class="vrewards">${cards}</div>${streak}${tiers}`;
   }
 
-  function feedHtml(server, def) {
+  // One feed for the network: every server's list merged, each player once, newest first.
+  function feedHtml() {
     if (!feed) return `<p class="muted small">Loading voters…</p>`;
-    const list = (feed[server.id] || []).filter((v) => v && v.name).slice(0, 10);
+    const seen = new Map();
+    Object.values(feed).flat().filter((v) => v && v.name).forEach((v) => {
+      const key = (v.uuid || v.name).toLowerCase();
+      const had = seen.get(key);
+      if (!had || v.at > had.at) seen.set(key, had ? { ...v, sites: Math.max(v.sites || 0, had.sites || 0) } : v);
+    });
+    const list = Array.from(seen.values()).sort((a, b) => b.at - a.at).slice(0, 10);
     if (!list.length) return `<p class="muted small">No votes yet. Be the first!</p>`;
-    const total = def.sites.length;
+    const total = SITES.length;
     return `<ol class="voters">${list.map((v) => {
       const all = total && v.sites >= total;
       return `
@@ -215,40 +231,23 @@ window.VOTE = {
         go up here when it launches.</div>`;
   }
 
-  // Vote sites and the feed show every server at once, grouped by server. The tabs under
+  // The vote sites and the feed are the network's, shared by every server. The tabs under
   // "What voting gets you" only switch the rewards.
   function render() {
     const server = servers.find((s) => s.id === current);
-    const def = VOTE[server.id];
-    const voting = servers.filter((s) => (VOTE[s.id].sites || []).length);
-    const waiting = servers.filter((s) => !(VOTE[s.id].sites || []).length);
+    const def = REWARDS[server.id];
     const many = servers.length > 1;
-    const firstDef = voting.length ? VOTE[voting[0].id] : def;
-    const commands = voting.map((s) => VOTE[s.id].commands).find(Boolean);
+    const commands = VOTE.commands;
     const tabs = servers.map((s) => `
       <button type="button" role="tab" data-vote-server="${esc(s.id)}" aria-selected="${s.id === current}"
         style="--accent: var(--${esc(s.id)})">OCG ${esc(s.name)}${s.status !== "live" ? ` <span class="pill">Soon</span>` : ""}</button>`).join("");
-
-    const groups = voting.map((s) => `
-      <div class="vote-group" style="--accent: var(--${esc(s.id)})">
-        ${many ? `<h3 class="vote-group__title">OCG <span>${esc(s.name)}</span></h3>` : ""}
-        ${sitesHtml(s, VOTE[s.id])}
-      </div>`).join("") + waiting.map((s) => `
-      <p class="vote-group__soon" style="--accent: var(--${esc(s.id)})">OCG <span>${esc(s.name)}</span>: vote sites open when it launches.</p>`).join("");
-
-    const feeds = voting.map((s) => `
-      <div class="side-card surface" style="--accent: var(--${esc(s.id)})">
-        <p class="label">Recent voters${voting.length > 1 ? ` · ${esc(s.name)}` : ""}</p>
-        <div data-voters>${feedHtml(s, VOTE[s.id])}</div>
-        <p class="muted small vote-feed-note">Updates every 15 minutes.</p>
-      </div>`).join("");
 
     const hasRewards = (def.rewards || []).length || def.streak || def.tiers;
     root.innerHTML = `
       <div class="steps vote-steps">
         <div class="step surface">
           <h3>Pick a site</h3>
-          <p>Click <b>Vote</b> on any site below. Each one resets every ${firstDef.cooldown || 24} hours.</p>
+          <p>Click <b>Vote</b> on any site below. Each one resets every ${COOLDOWN} hours.</p>
         </div>
         <div class="step surface">
           <h3>Enter your name</h3>
@@ -264,10 +263,14 @@ window.VOTE = {
           <div class="vote-sites-head">
             <h2>Vote sites</h2>
           </div>
-          ${groups}
+          ${sitesHtml()}
         </div>
         <aside class="vote-side">
-          ${feeds}
+          <div class="side-card surface">
+            <p class="label">Recent voters</p>
+            <div data-voters>${feedHtml()}</div>
+            <p class="muted small vote-feed-note">Updates every 15 minutes.</p>
+          </div>
           ${commands ? `
           <div class="side-card surface">
             <p class="label">In game</p>
@@ -298,7 +301,7 @@ window.VOTE = {
     }
     const site = e.target.closest("[data-vote-site]");
     if (site) {
-      opened.set(site.dataset.siteServer, site.dataset.voteSite);
+      opened.set("network", site.dataset.voteSite);
       // Let the new tab open first, then show the tick.
       setTimeout(render, 50);
     }
