@@ -30,17 +30,22 @@ window.NETWORK = {
   ],
 
   // OCG+ monthly tiers, cheapest first ($5 / $10 / $20).
+  // Perks carried over from Carbon+ I / II / III (2026-11-22). Renews every 30 days, stacks with
+  // any rank or works on its own, rewards pay once per billing period. Every tier can also be
+  // bought in game for Credits (500 / 1,000 / 2,000 per 4 weeks, Survival coin shop).
   // Keys are named by tier (T1 to T4), not crate name, because each server names its crates differently.
-  // Credits + keys are worth about half of a Credits pack at the same price (keys counted at
-  // their coin-shop price: T1 75, T2 125, T4 350). More perks get added over time.
   // Badge: one bolt by the name in chat and tab, coloured by tier: yellow (Charged), pink (Overcharged), teal (Supercharged).
   plus: [
     {
       name: "Charged",
       tagline: "A monthly top-up",
       items: [
-        ["coin", "<b>175 Credits</b> every month"],
+        ["coin", "<b>200 Credits</b> every month"],
         ["key", "<b>1 T1 crate key</b> every month"],
+        ["check", "<b>2,000 claim blocks</b> every month (Survival)"],
+        ["vote", "<b>Double vote rewards</b>"],
+        ["check", "<b>/fly</b> in your own claims"],
+        ["check", "<b>/shout</b> cooldown cut to <b>8 min</b>"],
         ["gem", "A <b>yellow bolt</b> by your name in chat and tab"]
       ]
     },
@@ -49,9 +54,12 @@ window.NETWORK = {
       tagline: "More loot, more perks",
       featured: true,
       items: [
-        ["coin", "<b>425 Credits</b> every month"],
-        ["key", "<b>1 T2 crate key</b> every month"],
-        ["vote", "<b>Double vote keys</b>"],
+        ["coin", "<b>500 Credits</b> every month"],
+        ["key", "<b>3 crate keys</b> every month: 2 T1, 1 T2"],
+        ["check", "<b>4,000 claim blocks</b> every month (Survival)"],
+        ["vote", "<b>Double vote rewards</b>"],
+        ["check", "<b>/fly</b> in your own claims"],
+        ["check", "<b>/shout</b> cooldown cut to <b>6 min</b>"],
         ["gem", "A <b>pink bolt</b> by your name in chat and tab"]
       ]
     },
@@ -59,10 +67,12 @@ window.NETWORK = {
       name: "Supercharged",
       tagline: "The full haul",
       items: [
-        ["coin", "<b>850 Credits</b> every month"],
-        ["key", "<b>1 T4 crate key</b> every month"],
-        ["vote", "<b>Double vote keys</b>"],
+        ["coin", "<b>1,200 Credits</b> every month"],
+        ["key", "<b>8 crate keys</b> every month: 3 T1, 2 T2, 2 T3, 1 T4"],
+        ["check", "<b>8,000 claim blocks</b> every month (Survival)"],
+        ["vote", "<b>Double vote rewards</b>"],
         ["check", "<b>/fly</b> in your own claims"],
+        ["check", "<b>/shout</b> cooldown cut to <b>4 min</b>"],
         ["gem", "A <b>teal bolt</b> by your name in chat and tab"]
       ]
     }
@@ -88,6 +98,8 @@ window.NETWORK = {
       network: [
         { title: "Everywhere", perks: [
           ["Rank tag in chat and tab on every server", [true, true, true, true, true]],
+          ["Coloured signs", [false, false, true, true, true]],
+          ["Coloured chat (/chatcolor)", [false, false, false, false, true]],
           ["Rank role in Discord", [true, true, true, true, true]]
         ]}
       ],
@@ -102,13 +114,18 @@ window.NETWORK = {
         { title: "Commands", perks: [
           ["/hat and /workbench", [true, true, true, true, true]],
           ["/enderchest", [false, true, true, true, true]],
-          ["/chatcolor", [false, true, true, true, true]],
-          ["/nick", [false, false, true, true, true]],
+          ["/nick, with colours", [false, false, true, true, true]],
           ["/heads", [false, false, true, true, true]],
-          ["/fly in your own claims", [false, false, false, true, true]]
+          ["/fly in your own claims", [false, false, false, true, true]],
+          ["/anvil and /grindstone", [false, false, false, false, true]],
+          ["/condense", [false, false, false, false, true]],
+          ["/sit and /ride", [false, false, false, false, true]],
+          ["/top", [false, false, false, false, true]],
+          ["/ptime (your own time of day)", [false, false, false, false, true]]
         ]},
         { title: "Extras", perks: [
-          ["Double vote keys", [false, false, false, true, true]]
+          ["Double vote keys", [false, false, false, true, true]],
+          ["SafariNet: catch and craft mob nets", [false, false, false, false, true]]
         ]}
       ],
       skyblock: [
