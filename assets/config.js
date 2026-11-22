@@ -16,7 +16,7 @@ window.STORE_CONFIG = {
   discord: "https://discord.gg/ocg",
   // Discord widget on the home page: invite code (for member counts) and server id (for
   // the online list). The Server Widget must stay on in Discord's server settings.
-  discordInvite: "carboncraft",
+  discordInvite: "ocg",
   discordGuildId: "816007504961601597",
   studio: "https://ocgames.xyz",
   email: "contact@ocgames.xyz",
