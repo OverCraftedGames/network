@@ -125,7 +125,7 @@ window.NETWORK = {
         ]},
         { title: "Extras", perks: [
           ["Double vote keys", [false, false, false, true, true]],
-          ["SafariNet: craft reusable mob nets", [false, false, false, false, true]]
+          ["SafariNet: craft both mob nets, no vote rank needed", [false, false, true, true, true]]
         ]}
       ],
       skyblock: [
