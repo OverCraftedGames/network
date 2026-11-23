@@ -189,6 +189,12 @@ window.NETWORK = {
         { name: "warbot45", servers: ["survival"] },
         { name: "zZestia", servers: ["survival"] }
       ]
+    },
+    {
+      role: "Marketing", title: "Marketing", key: "marketing",
+      members: [
+        { name: "CuriousGeorgia", servers: ["survival"] }
+      ]
     }
   ]
 };

@@ -1038,6 +1038,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .staff-card--admin { --role: var(--sale); }
 .staff-card--srmod { --role: var(--lavender); }
 .staff-card--builder { --role: var(--teal); }
+.staff-card--marketing { --role: var(--skyblock); }
 .staff-card__face {
   width: 64px; height: 64px;
   image-rendering: pixelated;
