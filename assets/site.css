@@ -440,7 +440,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .ptier--2 { --tier: #FF2E8A; }
 .ptier--3 { --tier: #0FB5A5; }
 /* An inner glow: the notch clip would cut off an outer one. */
-.ptier--featured { --nl: var(--line-strong); border-color: var(--line-strong); box-shadow: inset 0 0 60px rgba(58, 255, 245, 0.1); }
+.ptier--featured { --nl: var(--line-strong); border-color: var(--line-strong); border-top-color: var(--tier); box-shadow: inset 0 0 60px rgba(58, 255, 245, 0.1); }
 .ptier__flag {
   position: absolute; top: 18px; right: 18px;
   padding: 4px 10px;
