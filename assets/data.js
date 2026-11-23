@@ -193,7 +193,7 @@ window.NETWORK = {
     {
       role: "Marketing", title: "Marketing", key: "marketing",
       members: [
-        { name: "CuriousGeorgia", servers: ["survival"] }
+        { name: "CuriousGeorgia", servers: ["survival", "skyblock"] }
       ]
     }
   ]
