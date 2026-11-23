@@ -157,7 +157,40 @@ window.NETWORK = {
       "Crate keys",
       "Chat tags and join messages"
     ]
-  }
+  },
+
+  // Meet the Staff page (staff.html). Groups show in this order. `name` is the Minecraft
+  // username (the face comes from it); `servers` are server ids from the list above.
+  // Add an optional `bio: "..."` to anyone.
+  staff: [
+    {
+      role: "Owners", title: "Owner", key: "owner",
+      members: [
+        { name: "ApathyOnHigh", servers: ["survival", "skyblock"] },
+        { name: "Viltox", servers: ["survival", "skyblock"] },
+        { name: "Lapid_Pope", servers: ["survival", "skyblock"] }
+      ]
+    },
+    {
+      role: "Admins", title: "Admin", key: "admin",
+      members: [
+        { name: "Wulaosuuu", servers: ["survival"] }
+      ]
+    },
+    {
+      role: "Senior Mods", title: "Senior Mod", key: "srmod",
+      members: [
+        { name: "sac_attack_20", servers: ["survival"] }
+      ]
+    },
+    {
+      role: "Builders", title: "Builder", key: "builder",
+      members: [
+        { name: "warbot45", servers: ["survival"] },
+        { name: "zZestia", servers: ["survival"] }
+      ]
+    }
+  ]
 };
 
 // Small inline art, shared by the pages.

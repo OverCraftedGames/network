@@ -1025,3 +1025,34 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
   font-weight: 600; font-size: 0.92rem;
 }
 @media (max-width: 640px) { .recent__item { flex-basis: 112px; } }
+
+/* Meet the Staff */
+.staff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+.staff-card {
+  --role: var(--teal);
+  display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center;
+  padding: 20px;
+  box-shadow: inset 0 3px 0 var(--role), var(--shadow);
+}
+.staff-card--owner { --role: var(--danger); }
+.staff-card--admin { --role: var(--sale); }
+.staff-card--srmod { --role: var(--lavender); }
+.staff-card--builder { --role: var(--teal); }
+.staff-card__face {
+  width: 64px; height: 64px;
+  image-rendering: pixelated;
+  background: var(--surface-2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+.staff-card h3 { margin: 0; font: 700 1.2rem/1.2 var(--display); overflow-wrap: anywhere; }
+.staff-card__role { margin: 2px 0 8px; color: var(--role); font: 600 0.82rem var(--mono); letter-spacing: 0.02em; }
+.staff-card__bio { margin: 0 0 8px; color: var(--text-2); font-size: 0.92rem; }
+.staff-card__servers { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.staff-card__servers li {
+  --accent: var(--teal);
+  padding: 2px 8px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent);
+  font: 600 0.72rem var(--mono); letter-spacing: 0.02em;
+}
+.staff-card__servers .server--survival { --accent: var(--survival); }
+.staff-card__servers .server--skyblock { --accent: var(--skyblock); }

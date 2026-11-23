@@ -22,7 +22,8 @@
     ["vote", "vote", "Vote"],
     ["survival", "survival", "Survival"],
     ["skyblock", "skyblock", "Skyblock"],
-    ["wikis", "wikis", "Wikis"]
+    ["wikis", "wikis", "Wikis"],
+    ["staff", "staff", "Staff"]
   ];
   const storeLink = ["", "store", "Store", "nav-store"];
   const storeNav = [
@@ -86,6 +87,7 @@
           <a href="survival">Survival</a>
           <a href="skyblock">Skyblock</a>
           <a href="wikis">Wikis</a>
+          <a href="staff">Meet the Staff</a>
           <a href="vote">Vote</a>
           <a href="${discord}">Discord</a>
         </div>
