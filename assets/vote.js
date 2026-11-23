@@ -19,7 +19,8 @@ window.VOTE = {
     { id: "Minecraft_Buzz", name: "Minecraft.Buzz", url: "https://minecraft.buzz/vote/carboncraft" },
     { id: "TopG_org", name: "TopG", url: "https://topg.org/minecraft-servers/server-684319" },
     { id: "minecraft-serverlist-com", name: "Minecraft-Serverlist.com", url: "https://minecraft-serverlist.com/server/5848/vote" },
-    { id: "TopMinecraftServers", name: "Top Minecraft Servers", url: "https://topminecraftservers.org/vote/44378" }
+    { id: "TopMinecraftServers", name: "Top Minecraft Servers", url: "https://topminecraftservers.org/vote/44378" },
+    { id: "MinecraftServersList", name: "MinecraftServers-List", url: "https://minecraftservers-list.com/server/ocg-network/vote" }
   ],
   // Hours between votes on one site.
   cooldown: 24,
@@ -36,11 +37,11 @@ window.VOTE = {
           label: "Every vote",
           title: "Each site, every day",
           items: [["coin", "<b>$50</b> in-game money"], ["check", "<b>10</b> claim blocks"]],
-          note: "That's up to $300 and 60 claim blocks a day across all six sites."
+          note: "That's up to $350 and 70 claim blocks a day across all seven sites."
         },
         {
           label: "All sites",
-          title: "All six in one day",
+          title: "All seven in one day",
           items: [["key", "<b>2 Vote Keys</b>"], ["key", "<b>2 more</b> with double vote keys"]],
           note: "Double vote keys come with any OCG+ tier, or the Prism and Radiant ranks. You also get a shout-out in chat."
         },
@@ -54,7 +55,7 @@ window.VOTE = {
       streak: {
         days: [2, 4, 6, 8, 10, 12, 14],
         windowHours: 36,
-        text: "A day counts once you've voted on all six sites. Finish the next day within 36 hours, or the streak starts again from day 1. After day 7 a fresh week begins."
+        text: "A day counts once you've voted on all seven sites. Finish the next day within 36 hours, or the streak starts again from day 1. After day 7 a fresh week begins."
       },
       tiers: {
         every: 35,
