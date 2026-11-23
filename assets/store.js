@@ -136,12 +136,12 @@
     return json.data;
   }
 
-  // Tebex leaves every package at order 0 until they are dragged in the panel, so ties fall
-  // back to price (cheapest first) and then id (oldest first), which keeps tiers and ranks
-  // paired with data.js.
+  // Packages always list cheapest first, matching the data.js ladders (OCG+ tiers, ranks), so
+  // every store tab reads the same way whatever order they were dragged into in the Tebex
+  // panel. Equal prices fall back to the panel order, then id (oldest first).
   const sortByOrder = (list) => (list || []).slice().sort((a, b) =>
-    (a.order || 0) - (b.order || 0) ||
     (a.total_price || 0) - (b.total_price || 0) ||
+    (a.order || 0) - (b.order || 0) ||
     (a.id || 0) - (b.id || 0));
   const categoryArt = (c) => ((c.packages || []).find((p) => p.image) || {}).image || "";
 
