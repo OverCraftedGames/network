@@ -174,7 +174,7 @@ window.NETWORK = {
     {
       role: "Admins", title: "Admin", key: "admin",
       members: [
-        { name: "Wulaosuuu", servers: ["survival"] }
+        { name: "Wulaosuu", servers: ["survival"] }
       ]
     },
     {
