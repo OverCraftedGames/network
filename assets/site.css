@@ -766,6 +766,8 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .footer__cols div > a:not(.brand) { display: block; margin-bottom: 9px; color: var(--muted); }
 .footer__cols div > a:not(.brand):hover { color: var(--text); }
 .footer__legal { margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.82rem; }
+.footer__legal p { margin: 0 0 6px; }
+.footer__disclaimer { color: var(--text); font: 600 0.78rem var(--mono); letter-spacing: 0.06em; }
 
 /* Scroll reveal (added by store.js; content is visible without JS) */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }

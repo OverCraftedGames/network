@@ -112,9 +112,13 @@
           <a href="https://checkout.tebex.io/impressum">Impressum</a>
         </div>
       </div>
-      <p class="footer__legal">&copy; ${new Date().getFullYear()} OCG Network, run by
-        <a href="${cfg.studio || "https://ocgames.xyz"}">OverCrafted Games</a>.
-        Not affiliated with Mojang AB or Microsoft.</p>
+      <div class="footer__legal">
+        <p class="footer__disclaimer">NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED
+          WITH MOJANG OR MICROSOFT.</p>
+        <p>&copy; ${new Date().getFullYear()} OCG Network is run and owned by
+          <a href="${cfg.studio || "https://ocgames.xyz"}">OverCrafted Games</a>.
+          Contact: <a href="mailto:${cfg.email || "contact@ocgames.xyz"}">${cfg.email || "contact@ocgames.xyz"}</a></p>
+      </div>
     </div>`;
 
   body.insertAdjacentHTML("afterbegin", `
