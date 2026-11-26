@@ -1,6 +1,12 @@
 {
   "survival": [
     {
+      "name": "Wulaosuu",
+      "uuid": "b77db96603bb481cb3857617a9b817cb",
+      "at": "2026-11-26T07:40:27.004Z",
+      "sites": 7
+    },
+    {
       "name": "EntireGalaxy",
       "uuid": "f702d35a58d54df2b7fba2a98de2b16d",
       "at": "2026-11-26T01:36:02.893Z",
@@ -49,9 +55,9 @@
       "sites": 7
     },
     {
-      "name": "Wulaosuu",
-      "uuid": "b77db96603bb481cb3857617a9b817cb",
-      "at": "2026-11-25T02:32:48.961Z",
+      "name": "scopclaw",
+      "uuid": "5b4eaf002968493ca73a75d2b7679ca3",
+      "at": "2026-11-25T09:18:02.970Z",
       "sites": 7
     },
     {
@@ -64,12 +70,6 @@
       "name": "Fofq",
       "uuid": "172f422536a747a9824496fc17a253c7",
       "at": "2026-11-24T18:56:42.576Z",
-      "sites": 7
-    },
-    {
-      "name": "Lapid_Pope",
-      "uuid": "014fd9e9eaae42e58a5cff3ce25f83ad",
-      "at": "2026-11-24T17:05:28.469Z",
       "sites": 7
     }
   ]
