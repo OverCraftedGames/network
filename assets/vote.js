@@ -1,17 +1,4 @@
-// Vote page (vote.html). The network has one listing on each vote site, so the sites and the
-// recent voter feed are shared by every server. Only the rewards differ per server; the server
-// tabs under "What voting gets you" switch them (#survival, #skyblock). Server names and status
-// come from data.js.
-//
-// The vote sites and rewards below mirror the server config. Keep them in step when it changes:
-//   Sites, per-vote rewards       VotingPlugin/VoteSites.yml
-//   All-sites bonus, vote party   VotingPlugin/SpecialRewards.yml + Rewards/AllSitesKeys.yml
-//   Vote streak                   CarbonCore/CarbonSpend/config.yml (vote-streak)
-//   Vote tiers                    CMI/Settings/Ranks.yml (Votes: per tier)
-//
-// The feed reads votes/recent.json, written every 15 minutes by scripts/sync-votes.mjs. It has
-// one list per server database; the page merges them into one feed.
-// Demo mode reads assets/demo-votes.json instead.
+// vote page
 window.VOTE = {
   sites: [
     { id: "MinecraftServers_org", name: "MinecraftServers.org", url: "https://minecraftservers.org/vote/690376" },
@@ -22,14 +9,12 @@ window.VOTE = {
     { id: "TopMinecraftServers", name: "Top Minecraft Servers", url: "https://topminecraftservers.org/vote/44378" },
     { id: "MinecraftServersList", name: "MinecraftServers-List", url: "https://minecraftservers-list.com/server/ocg-network/vote" }
   ],
-  // Hours between votes on one site.
   cooldown: 24,
   commands: [
     ["/vote", "the vote links in game"],
     ["/vote next", "when each site is ready again"],
     ["/votetiers", "your tier and what's next"]
   ],
-  // Rewards per server.
   servers: {
     survival: {
       rewards: [
@@ -62,13 +47,12 @@ window.VOTE = {
         count: 50,
         color: "#C0CED5",
         perTier: ["<b>$2,000</b> in-game money", "<b>100</b> claim blocks"],
-        // Every fifth tier unlocks its numeral as a chat suffix.
         suffixEvery: 5,
         extras: "Some tiers also add more homes, player warps, auction house slots and a player vault."
       }
     },
     skyblock: {
-      // No rewards yet. Fill this in like Survival when Skyblock opens.
+      // TODO: skyblock rewards
     }
   }
 };
@@ -92,8 +76,7 @@ window.VOTE = {
   const roman = (n) => ROMAN.reduce((out, [v, s]) => { while (n >= v) { out += s; n -= v; } return out; }, "");
   const num = (n) => n.toLocaleString("en-US");
 
-  // Which sites this browser has opened, so players can see what's left today. Only a
-  // reminder: opening a site isn't the same as voting on it. Storage can throw; it's optional.
+  // remember which sites were opened today
   const opened = {
     key: (server, site) => `ocg.vote.${server}.${site}`,
     get(server, site) { try { return Number(localStorage.getItem(this.key(server, site))) || 0; } catch (e) { return 0; } },
@@ -201,7 +184,6 @@ window.VOTE = {
     return `<div class="vrewards">${cards}</div>${streak}${tiers}`;
   }
 
-  // One feed for the network: every server's list merged, each player once, newest first.
   function feedHtml() {
     if (!feed) return `<p class="muted small">Loading voters…</p>`;
     const seen = new Map();
@@ -232,8 +214,6 @@ window.VOTE = {
         go up here when it launches.</div>`;
   }
 
-  // The vote sites and the feed are the network's, shared by every server. The tabs under
-  // "What voting gets you" only switch the rewards.
   function render() {
     const server = servers.find((s) => s.id === current);
     const def = REWARDS[server.id];
@@ -293,8 +273,7 @@ window.VOTE = {
     fitFeed();
   }
 
-  // Side by side, the feed shows only as many voters as fit beside the vote sites, so the
-  // sidebar never runs longer than them. Stacked (narrow screens), it shows them all.
+  // cap the feed to the height of the sites column
   function fitFeed() {
     const main = root.querySelector(".vote-main");
     const card = root.querySelector(".vote-side .side-card");
@@ -321,7 +300,6 @@ window.VOTE = {
     const site = e.target.closest("[data-vote-site]");
     if (site) {
       opened.set("network", site.dataset.voteSite);
-      // Let the new tab open first, then show the tick.
       setTimeout(render, 50);
     }
   });
@@ -331,7 +309,6 @@ window.VOTE = {
     if (id !== current && servers.some((s) => s.id === id)) { current = id; render(); }
   });
 
-  // Coming back to the tab after voting: refresh the ticks and the "x ago" times.
   document.addEventListener("visibilitychange", () => { if (!document.hidden) render(); });
 
   async function loadFeed() {
@@ -342,7 +319,6 @@ window.VOTE = {
       const out = {};
       Object.entries(body || {}).forEach(([id, list]) => {
         if (!Array.isArray(list)) return;
-        // Demo entries give minutesAgo so the preview always looks recent.
         out[id] = list.map((v) => ({
           ...v,
           at: v.minutesAgo != null ? Date.now() - v.minutesAgo * 60000 : Date.parse(v.at)

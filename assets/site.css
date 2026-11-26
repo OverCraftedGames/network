@@ -1,6 +1,4 @@
-/* OCG Network. OverCrafted Games brand: logo teal (#3afff5), black and white, with the
-   logo's diamond as the recurring shape. Each server page sets its own --accent
-   (body[data-accent]); everything else stays teal. Dark only: the site sits next to the game. */
+/* OCG Network */
 :root {
   --bg: #040607;
   --bg-2: #0a0f10;
@@ -36,7 +34,6 @@ body {
   font: 400 16.5px/1.6 var(--body);
   -webkit-font-smoothing: antialiased;
   background-color: var(--bg);
-  /* A faint teal glow over a fine diamond lattice, echoing the logo. */
   background-image:
     radial-gradient(1100px 560px at 15% -12%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 65%),
     radial-gradient(900px 500px at 100% 0%, rgba(58, 255, 245, 0.07), transparent 70%),
@@ -137,8 +134,6 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -0.015em; }
 }
 .chip img { image-rendering: pixelated; }
 .chip:hover { --nl: var(--teal); border-color: var(--teal); }
-/* The count badge overhangs the button's corner, so the button itself isn't clipped:
-   its notched teal fill is drawn by ::before (see Notched corners). */
 .basket-btn {
   position: relative; isolation: isolate;
   display: grid; place-items: center;
@@ -158,7 +153,7 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -0.015em; }
 .basket-btn__count.bump { animation: bump 0.4s ease; }
 @keyframes bump { 40% { transform: scale(1.35); } }
 
-/* Store sub-navigation: the store is its own area of the site. */
+/* Store nav */
 .storebar { border-bottom: 1px solid var(--line); background: rgba(58, 255, 245, 0.035); }
 .storebar__inner { display: flex; align-items: center; gap: 4px; overflow-x: auto; padding: 8px 0; white-space: nowrap; scrollbar-width: none; }
 .storebar__inner::-webkit-scrollbar { display: none; }
@@ -259,7 +254,7 @@ main > .section:last-child, main > :last-child .section:last-child { padding-bot
   background-color: var(--surface);
 }
 
-/* Server cards (home + store server picker) */
+/* Server cards */
 .servers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .server {
   --accent: var(--teal);
@@ -299,7 +294,7 @@ a.server:hover { --nl: var(--line-strong); transform: translateY(-3px); border-c
   font: 600 0.72rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase;
 }
 
-/* Link tiles (home "jump in", wikis) */
+/* Link tiles */
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .tile {
   display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start;
@@ -315,7 +310,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .tile p { margin: 0; color: var(--muted); font-size: 0.92rem; }
 .tile--soon { opacity: 0.6; }
 
-/* Category cards (store hub) */
+/* Category cards */
 .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
 .cat-card {
   display: grid; grid-template-columns: 130px 1fr; gap: 22px; align-items: center;
@@ -439,7 +434,6 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .ptier--1 { --tier: #FFC800; }
 .ptier--2 { --tier: #FF2E8A; }
 .ptier--3 { --tier: #0FB5A5; }
-/* An inner glow: the notch clip would cut off an outer one. */
 .ptier--featured { --nl: var(--line-strong); border-color: var(--line-strong); border-top-color: var(--tier); box-shadow: inset 0 0 60px rgba(58, 255, 245, 0.1); }
 .ptier__flag {
   position: absolute; top: 18px; right: 18px;
@@ -494,7 +488,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .ranks td { color: var(--text); font-weight: 600; }
 .ranks td.no { color: var(--muted); font-weight: 400; }
 .ranks td.yes { color: var(--accent); font-size: 1.15rem; }
-/* Keep the perk names in view while the rank columns scroll sideways on phones. */
+/* sticky first column on mobile */
 .ranks th[scope="row"], .ranks thead th:first-child { position: sticky; left: 0; z-index: 1; background: #0c1213; }
 .ranks .group th { padding: 10px 16px; text-align: left; background: rgba(58, 255, 245, 0.04); color: var(--accent); font: 600 0.74rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
 .rank-head { display: grid; justify-items: center; gap: 8px; }
@@ -516,7 +510,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .uses li { position: relative; padding: 8px 0 8px 22px; border-top: 1px solid var(--line); color: var(--text-2); }
 .uses li::before { content: ""; position: absolute; left: 3px; top: 16px; width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); }
 
-/* Rewards call-to-action band */
+/* Rewards band */
 .band {
   display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px;
   padding: 28px 32px;
@@ -555,7 +549,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .page-head__art { width: 150px; margin-bottom: -10px; filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.6)); }
 .page-head__art svg { width: 100%; height: auto; }
 
-/* Prose (legal pages) */
+/* Prose */
 .doc { display: grid; grid-template-columns: 220px 1fr; gap: 40px; padding: 40px 0 88px; }
 .toc { position: sticky; top: 130px; align-self: start; display: flex; flex-direction: column; gap: 4px; }
 .toc a { padding: 6px 12px; border-left: 2px solid var(--line); color: var(--muted); font-weight: 600; font-size: 0.95rem; }
@@ -696,7 +690,6 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
   border: 1px solid rgba(255, 255, 255, 0.16);
   background-color: rgba(0, 0, 0, 0.4); color: var(--text); font: inherit;
 }
-/* A border, not an outline: the notch clip would hide an outline. */
 .coupon input:focus, .modal input:focus, .gift input:focus { --nl: var(--teal); outline: 0; border-color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal); }
 .coupon button, .gift button {
   --nl: rgba(255, 255, 255, 0.16);
@@ -769,7 +762,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .footer__legal p { margin: 0 0 6px; }
 .footer__disclaimer { color: var(--text); font: 600 0.78rem var(--mono); letter-spacing: 0.06em; }
 
-/* Scroll reveal (added by store.js; content is visible without JS) */
+/* Scroll reveal */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
@@ -842,7 +835,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 
 .grad { color: var(--teal); }
 
-/* Store hub: OCG+, Ranks and Credits side by side, stacking on narrow screens. */
+/* Store hub */
 .cat-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .cat-grid--3 .cat-card { grid-template-columns: 1fr; align-items: start; }
 .cat-grid--3 .cat-card__art { width: 96px; }
@@ -852,7 +845,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
   .cat-grid--3 .cat-card__art { width: auto; }
 }
 
-/* ---- Home: banner, news feed and sidebar ---- */
+/* Home */
 .banner { border-bottom: 1px solid var(--line); background: radial-gradient(700px 260px at 10% 0%, rgba(58, 255, 245, 0.12), transparent 70%); }
 .banner__inner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; padding: 36px 0 32px; }
 .banner__logo { width: 104px; height: auto; filter: drop-shadow(0 10px 24px rgba(58, 255, 245, 0.25)); }
@@ -897,14 +890,12 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 .post__body li { margin-bottom: 4px; }
 .post__body li::marker { color: var(--accent); }
 .post__body blockquote { margin: 0 0 12px; padding: 4px 0 4px 14px; border-left: 3px solid var(--line-strong); }
-/* Inline code is inline-block so the notch cuts the whole chip, not a wrapped line box. */
 .post__body code { display: inline-block; padding: 1px 6px; background: rgba(0, 0, 0, 0.4); color: var(--teal); font: 0.88em var(--mono); }
 .post__body pre { margin: 0 0 12px; padding: 12px 14px; background: rgba(0, 0, 0, 0.45); overflow-x: auto; }
 .post__body pre code { display: inline; padding: 0; background: none; color: var(--text-2); clip-path: none; }
 .post__body .subtext { color: var(--muted); font-size: 0.82rem; }
 .post__body .emoji { display: inline-block; vertical-align: -0.3em; width: 1.35em; height: 1.35em; }
 .post__body .mention { display: inline-block; padding: 0 3px; background: rgba(88, 101, 242, 0.25); color: #c9cdfb; }
-/* Square, not notched: a spoiler can wrap over several lines, and a clip would cut the text. */
 .post__body .spoiler { background: #202225; color: transparent; cursor: pointer; }
 .post__body .spoiler.shown { background: rgba(255, 255, 255, 0.08); color: inherit; cursor: auto; }
 .post__gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 12px; }
@@ -955,17 +946,7 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
   .post__title { font-size: 1.35rem; }
 }
 
-/* ---- Notched corners ----
-   Same look as the wiki (Test Env/wiki/docs/assets/ocg-survival.css): every box has its
-   top-left and bottom-right corners cut at 45°, like a HUD panel. clip-path does the cut, and
-   --notch-lines draws the border back along each cut, because the clip removes the real
-   border there. --n is the cut size and --nl the line colour: set --nl to the box's border
-   colour (it stays transparent on boxes without a border). A box that sets its own
-   background-image lists var(--notch-lines) first (.band, .offer, .modal, .cat-card__art), and
-   a bordered box sets background-color, not the background shorthand, so the lines survive.
-   The clip also cuts anything drawn outside the box, so glows are inset and focus rings are
-   drawn inside. Only true circles stay round: .dot, .track and the Discord avatars.
-   :where() keeps these rules at zero specificity, so any component can override them. */
+/* Notched corners: --n = cut size, --nl = line colour (match the border) */
 :where(
   .surface, .ranks-scroll, .modal,
   .btn, .chip, .chip img, .ipbox, .ipbox button, .copy-btn, .tile__icon, .cat-card__art,
@@ -1004,13 +985,12 @@ a.tile:hover { --nl: var(--line-strong); transform: translateY(-2px); border-col
 ) { --n: 5px; }
 :where(.chip img, .post__body .mention) { --n: 4px; }
 
-/* Focus rings sit inside notched controls; outside them the clip would hide the ring. */
 :is(.btn, .basket-btn, .chip, .topnav a, .mobilenav a, .storebar a, .ipbox button, .copy-btn,
   .tab, .server-switch a, .rank-tabs button, .icon-btn, .coupon button, .gift button,
   a.surface, .card__art):focus-visible { outline-offset: -4px; }
 .btn:focus-visible, .basket-btn:focus-visible { outline-color: currentColor; }
 
-/* Recent supporters (store hub): one row of player heads; swipes sideways on narrow screens. */
+/* Recent supporters */
 .recent {
   display: flex; gap: 12px;
   margin: 0; padding: 0 0 6px; list-style: none;

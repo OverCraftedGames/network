@@ -1,5 +1,4 @@
-// Home page: the news feed (news/posts.json, mirrored from the Discord announcements
-// channel by scripts/sync-news.mjs) and the Discord card in the sidebar.
+// news feed + discord card
 (() => {
   "use strict";
 
@@ -22,7 +21,6 @@
     };
   }
 
-  // Server tag -> accent colour variable (Network uses the brand teal).
   const tagVar = (tag) => {
     const id = String(tag || "").toLowerCase();
     return (window.NETWORK && NETWORK.servers.some((s) => s.id === id)) ? `var(--${id})` : "var(--teal)";
@@ -48,7 +46,6 @@
       </article>`;
   }
 
-  // Long posts start folded, like a forum front page; the button opens them in place.
   function foldLong(root) {
     root.querySelectorAll(".post").forEach((post) => {
       const body = post.querySelector(".post__body");
@@ -68,7 +65,7 @@
     added.forEach((el) => feed.appendChild(el));
     shown += next.length;
     more.hidden = shown >= posts.length;
-    // Images change the height, so measure again once they've loaded.
+    // re-measure once images load
     foldLong(feed);
     added.forEach((el) => el.querySelectorAll("img").forEach((img) => img.addEventListener("load", () => foldLong(feed), { once: true })));
   }
@@ -89,7 +86,6 @@
       more.hidden = true;
       return;
     }
-    // A link to an older post loads enough pages to include it.
     const target = location.hash.replace(/^#post-/, "");
     const idx = target ? posts.findIndex((p) => p.id === target) : -1;
     do { showMore(); } while (idx >= shown);
@@ -116,7 +112,7 @@
   });
   more && more.addEventListener("click", showMore);
 
-  // ---- Discord card ----
+  // discord
   async function loadDiscord() {
     const card = document.querySelector("[data-discord]");
     if (!card) return;
@@ -125,7 +121,6 @@
       const res = await fetch(`https://discord.com/api/v10/invites/${encodeURIComponent(cfg.discordInvite || "")}?with_counts=true`);
       const inv = await res.json();
       if (inv.guild) {
-        // The card keeps its own title (OCG Discord); only the icon comes from Discord.
         if (inv.guild.icon) {
           const img = card.querySelector("[data-discord-icon]");
           img.src = `https://cdn.discordapp.com/icons/${inv.guild.id}/${inv.guild.icon}.png?size=96`;

@@ -1,21 +1,7 @@
-// Mirrors a Discord announcements channel into news/posts.json for the home page feed.
-// Runs in GitHub Actions on a schedule (.github/workflows/sync-news.yml), or by hand:
-//
-//   node --env-file=.env scripts/sync-news.mjs                     (locally, token in .env)
-//   DISCORD_BOT_TOKEN=... DISCORD_NEWS_CHANNEL_ID=... node scripts/sync-news.mjs
-//   node scripts/sync-news.mjs --seed news/seed-messages.json      (offline, from a file)
-//
-// The bot needs View Channel and Read Message History on the channel, nothing else.
-// Images are downloaded into news/media/ because Discord's attachment links expire.
-//
-// Writing a post in Discord:
-//   - The first line is the title. "# Title" or "**Title**" both work, and so does a plain
-//     first line of up to 100 characters when more text follows it.
-//   - Start the title with [Survival], [Skyblock] or [Network] to tag it (default Network).
-//   - The first image attached becomes the cover; later images go under the text.
-//   - Put [noweb] anywhere in a message to keep it off the site.
-//   - Editing or deleting the Discord message updates the site on the next sync, and
-//     images no post uses any more are deleted from news/media/.
+// Discord announcements -> news/posts.json
+// node --env-file=.env scripts/sync-news.mjs
+// node scripts/sync-news.mjs --seed news/seed-messages.json
+// first line = title, [Survival]/[Skyblock]/[Network] tag, [noweb] skips a post
 import { mkdir, readFile, writeFile, access, readdir, unlink } from "node:fs/promises";
 import { dirname, join, extname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -26,7 +12,7 @@ const MEDIA = join(ROOT, "news", "media");
 const LIMIT = 50;
 const TAGS = { survival: "Survival", skyblock: "Skyblock", network: "Network" };
 
-// ---- Discord markdown -> HTML ----
+// discord markdown -> html
 
 const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
@@ -39,8 +25,7 @@ function formatStamp(unix, style) {
   return date + ", " + time;
 }
 
-// Inline formatting on escaped text. Code spans, links, emoji and mentions are cut out into
-// placeholders first, so the emphasis rules below never touch URLs or attributes.
+// placeholders keep the emphasis rules off urls
 function inline(text, ctx) {
   const stash = [];
   const keep = (html) => { stash.push(html); return `\u0000${stash.length - 1}\u0000`; };
@@ -129,7 +114,7 @@ function toHtml(md, ctx) {
 const plain = (html) => html.replace(/<\/(p|li|h\d|blockquote|pre)>|<br>/g, " ").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
   .replace(/&quot;/g, '"').replace(/\s+/g, " ").trim();
 
-// ---- message -> post ----
+// message -> post
 
 const isImage = (a) => /^image\//.test(a.content_type || "") || /\.(png|jpe?g|gif|webp)$/i.test(a.filename || a.url || "");
 
@@ -148,7 +133,6 @@ async function saveMedia(url, name, offline) {
 
 async function toPost(msg, offline) {
   let text = msg.content || "";
-  // Bot-style announcements put everything in an embed.
   for (const e of msg.embeds || []) {
     if (e.type && e.type !== "rich") continue;
     const parts = [];
@@ -176,7 +160,6 @@ async function toPost(msg, offline) {
     if (title) title = title.slice(tagMatch[0].length);
     else lines[0] = lines[0].replace(tagMatch[0], "");
   }
-  // No heading markup: a short first line followed by more text still reads as the title.
   if (!title && lines.length > 1 && lines.slice(1).some((l) => l.trim())) {
     const candidate = lines[0].trim();
     if (candidate && candidate.length <= 100) {
@@ -221,7 +204,7 @@ async function toPost(msg, offline) {
   };
 }
 
-// ---- main ----
+// main
 
 async function fetchMessages() {
   const token = process.env.DISCORD_BOT_TOKEN;
@@ -232,7 +215,7 @@ async function fetchMessages() {
   });
   if (!res.ok) throw new Error(`Discord API ${res.status}: ${await res.text()}`);
   const messages = await res.json();
-  // Without the Message Content intent Discord returns every message with empty text.
+  // needs the Message Content intent
   if (messages.length && messages.every((m) => !m.content && !(m.embeds || []).length && !(m.attachments || []).length)) {
     throw new Error("Every message came back empty. Turn on Message Content Intent for the bot (Developer Portal > Bot), then run again.");
   }
@@ -257,8 +240,7 @@ async function main() {
 
   const next = JSON.stringify({ posts }, null, 2) + "\n";
 
-  // Delete images no post uses any more (deleted, [noweb] or edited posts), so they
-  // stop being published too.
+  // remove unused images
   if (!offline) {
     const used = new Set((next.match(/news\/media\/[^"\\]+/g) || []).map((p) => p.slice("news/media/".length)));
     for (const name of await readdir(MEDIA)) {

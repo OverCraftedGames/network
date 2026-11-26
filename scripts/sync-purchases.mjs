@@ -1,16 +1,6 @@
-// Writes the most recent store buyers to purchases/recent.json for the "Recent supporters"
-// row on the store page. Runs in GitHub Actions on a schedule (.github/workflows/sync-purchases.yml),
-// or by hand:
-//
-//   node --env-file=.env scripts/sync-purchases.mjs          (locally, key in .env)
-//   TEBEX_SECRET=... node scripts/sync-purchases.mjs
-//
-// Uses the Tebex Plugin API, which needs the store's SECRET key (Tebex > Integrations >
-// Game Servers). That key can take payments and run commands, so it must never be in the
-// site's own files: keep it in the TEBEX_SECRET repository secret only.
-//
-// Only the player name and UUID are written out. Amounts, packages, emails and payment IDs
-// never reach the repo. Each player appears once, newest purchase first.
+// recent buyers -> purchases/recent.json (names + uuids only)
+// node --env-file=.env scripts/sync-purchases.mjs
+// needs TEBEX_SECRET, never commit it
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";

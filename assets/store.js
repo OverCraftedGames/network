@@ -1,13 +1,4 @@
-// OCG Network site and store front end on the Tebex Headless API.
-// Live mode needs only the public token (assets/config.js); payment runs in Tebex's own
-// checkout (Tebex.js popup, or a redirect to the basket's checkout link as a fallback).
-// Demo mode (no token, config forceDemo, or ?demo) reads assets/demo-catalogue.json and
-// keeps the basket locally. ?live overrides forceDemo for testing.
-// The basket, player chip and server status run on every page (chrome from layout.js).
-// Catalogue sections render wherever the page has their container:
-//   #home-categories   category cards (store hub)       #package-grid  tabbed all-packages
-//   [data-packages=slug] package cards for one category  [data-plus]    OCG+ tier cards
-//   [data-ranks=server]  rank comparison table          [data-servers] server cards (data.js)
+// Store front end (Tebex Headless API). Demo mode: ?demo or forceDemo.
 (() => {
   "use strict";
 
@@ -31,7 +22,6 @@
     homeCats: $("home-categories")
   };
 
-  // localStorage can throw (private windows, blocked storage); the store works without it.
   const saved = {
     get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
     set(key, value) {
@@ -49,7 +39,7 @@
   let username = saved.get("ocg.username");
   let busy = false;
 
-  // ---- helpers ----
+  // helpers
 
   function esc(text) {
     return String(text == null ? "" : text).replace(/[&<>"']/g, (c) => (
@@ -97,7 +87,7 @@
 
   const account = (path) => "/accounts/" + encodeURIComponent(token) + path;
 
-  // "OCG+ [3 Month]" -> title "OCG+", variant "3 Month".
+  // "OCG+ [3 Month]" -> OCG+ / 3 Month
   function splitName(name) {
     const m = /^(.*?)\s*\[(.+)\]\s*$/.exec(String(name || ""));
     return m ? { title: m[1], variant: m[2] } : { title: String(name || ""), variant: "" };
@@ -107,7 +97,7 @@
     return p.discount > 0 ? Math.round((p.discount / (p.total_price + p.discount)) * 100) : 0;
   }
 
-  // Tebex's base_price is already the sale price; the pre-sale price is price + discount.
+  // base_price is already discounted
   function priceHtml(p) {
     const sub = p.type === "subscription" && p.expiry_period;
     const period = !sub ? "" : p.expiry_period.count === 1
@@ -125,7 +115,7 @@
   }
   const pageUrl = () => location.origin + location.pathname;
 
-  // ---- catalogue ----
+  // catalogue
 
   async function loadCatalogue() {
     if (demo) {
@@ -136,9 +126,7 @@
     return json.data;
   }
 
-  // Packages always list cheapest first, matching the data.js ladders (OCG+ tiers, ranks), so
-  // every store tab reads the same way whatever order they were dragged into in the Tebex
-  // panel. Equal prices fall back to the panel order, then id (oldest first).
+  // cheapest first, then panel order, then id
   const sortByOrder = (list) => (list || []).slice().sort((a, b) =>
     (a.total_price || 0) - (b.total_price || 0) ||
     (a.order || 0) - (b.order || 0) ||
@@ -160,7 +148,6 @@
     }).join("");
   }
 
-  // Only lines for the player themself; a gift of the same package is a separate line.
   function inBasket(pkgId) {
     return !!(basket && basket.packages && basket.packages.some((p) =>
       String(p.id) === String(pkgId) && !(p.in_basket && p.in_basket.gift_username)));
@@ -230,7 +217,7 @@
         return `<a class="ticker__item" href="${esc(catHref(d.slug))}"><b>-${savePercent(d.p)}%</b>${esc(n.title)}${n.variant ? " " + esc(n.variant) : ""}</a>`;
       });
       while (items.length < 8) items = items.concat(items);
-      // Two identical halves so the -50% scroll loops without a seam.
+      // doubled so it loops
       ticker.querySelector(".ticker__track").innerHTML = items.join("") + items.join("");
       ticker.hidden = false;
     }
@@ -243,7 +230,6 @@
       els.grid.innerHTML = `<p class="muted">Nothing for sale right now.</p>`;
       return;
     }
-    // Long panel descriptions start folded so the packages stay near the top.
     const intro = cat.description ? `
       <div class="category-intro surface folded">
         <div class="category-intro__text">${cat.description}</div>
@@ -257,16 +243,13 @@
     }
   }
 
-  // Everything that shows "In basket" state re-renders together.
   function renderGrid() {
     renderTabbedGrid();
     renderStorePages();
   }
 
-  // ---- network pages ----
+  // network pages
 
-  // The store page for a Tebex category: dedicated pages for the known ones, else the
-  // all-packages page on that tab.
   function catHref(slug) {
     const pages = {
       [CATS.plus]: "plus",
@@ -278,9 +261,7 @@
 
   const catBySlug = (slug) => categories.find((c) => c.slug === slug);
   const pkgsFor = (slug) => { const c = catBySlug(slug); return c ? sortByOrder(c.packages) : []; };
-  // Pairs a data.js tier or rank with its Tebex package by name (whole word, so "Charged"
-  // doesn't match "Overcharged"), falling back to position. The panel's drag order can
-  // differ from the ladder order.
+  // match by name (whole word), else by position
   const pkgNamed = (pkgs, name, i) => {
     const rx = new RegExp("\\b" + String(name || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i");
     return (name && pkgs.find((p) => rx.test(p.name || ""))) || pkgs[i];
@@ -327,8 +308,6 @@
     return `<td>${esc(value)}</td>`;
   }
 
-  // Ranks are network-wide: one ladder, one purchase. The table shows the network perks
-  // plus the perks for one server at a time, picked with the server tabs (#survival etc.).
   let rankServer = null;
 
   function renderRanks() {
@@ -405,7 +384,6 @@
     });
   }
 
-  // Home sidebar: current sales if there are any, otherwise the OCG+ tiers.
   function renderSpotlight() {
     const el = document.querySelector("[data-spotlight]");
     if (!el) return;
@@ -442,8 +420,6 @@
     renderRanks();
   }
 
-  // Server cards from data.js, linking to each server's page. data-servers="list" renders
-  // compact rows for the home page sidebar instead of full cards.
   function renderServers() {
     document.querySelectorAll('[data-servers="list"]').forEach((el) => {
       el.innerHTML = NET.servers.map((s) => {
@@ -521,12 +497,12 @@
     els.pkgModal.showModal();
   }
 
-  // Tebex gifts one-off packages only; subscriptions renew on the buyer's card.
+  // subscriptions can't be gifted
   function giftable(p) {
     return !p.disable_gifting && p.type !== "subscription";
   }
 
-  // ---- player ----
+  // player
 
   function renderPlayer() {
     if (username) {
@@ -539,7 +515,6 @@
     }
   }
 
-  // Resolves to the entered name, or null when the player cancels.
   function askUsername() {
     return new Promise((resolve) => {
       els.userInput.value = username || "";
@@ -564,7 +539,7 @@
     const hadItems = basket && basket.packages && basket.packages.length;
     username = name;
     saved.set("ocg.username", name);
-    // A Tebex basket belongs to one username, so a new name means a new basket.
+    // new name = new basket
     if (!demo && basket) {
       dropBasket();
       if (hadItems) toast("Username changed, so your basket was emptied.");
@@ -575,7 +550,7 @@
     renderBasket();
   }
 
-  // ---- basket ----
+  // basket
 
   function dropBasket() {
     basket = null;
@@ -632,7 +607,6 @@
     return basket;
   }
 
-  // giftTo: another player's username; the buyer still pays from their own basket.
   async function addPackage(pkgId, giftTo) {
     if (!giftTo && inBasket(pkgId)) { openBasket(); return; }
     const p = packages.get(String(pkgId));
@@ -706,8 +680,7 @@
     }
   }
 
-  // Some stores make the player sign in before checkout. Tebex returns the sign-in
-  // options; the player comes back here with the basket authorised.
+  // some stores need a sign-in before checkout
   async function authorize() {
     const returnUrl = encodeURIComponent(pageUrl() + "?basket=1");
     const json = await api(account("/baskets/" + encodeURIComponent(basket.ident) + "/auth?returnUrl=" + returnUrl));
@@ -819,7 +792,7 @@
     toast("Thanks for supporting OCG Network! Your items arrive in game shortly.");
   }
 
-  // ---- wiring ----
+  // wiring
 
   document.addEventListener("click", (event) => {
     const toggle = event.target.closest("[data-intro-toggle]");
@@ -871,7 +844,6 @@
     if (slug && slug !== activeSlug && categories.some((c) => c.slug === slug)) selectCategory(slug);
   });
 
-  // Any [data-copy] button copies its value (server IPs). Empty data-copy uses the network IP.
   document.addEventListener("click", async (e) => {
     const btn = e.target.closest("[data-copy]");
     if (!btn) return;
@@ -889,16 +861,13 @@
     el.textContent = el.dataset.ip || cfg.networkIp || "";
   });
 
-  // Tebex.js loads with defer; hook its events once it's there.
   window.addEventListener("load", () => {
     if (window.Tebex && Tebex.checkout && Tebex.checkout.on) {
       Tebex.checkout.on("payment:complete", paymentComplete);
     }
   });
 
-  // Live player counts from the public mcsrvstat.us API, one request per address.
-  // Elements: [data-status="ip"] holding a .dot and a text span; hidden if unreachable.
-  // [data-status-total] shows the sum across every live server.
+  // player counts (mcsrvstat.us)
   async function loadStatus() {
     const els2 = Array.from(document.querySelectorAll("[data-status]"));
     const totalEl = document.querySelector("[data-status-total]");
@@ -934,7 +903,6 @@
     }
   }
 
-  // Fade sections in as they scroll into view. Elements stay visible if this never runs.
   function reveal() {
     const items = document.querySelectorAll("[data-reveal]");
     if (!("IntersectionObserver" in window)) return;
@@ -947,7 +915,7 @@
     items.forEach((el) => { el.classList.add("reveal"); io.observe(el); });
   }
 
-  // Seasonal blocks carry data-until="YYYY-MM-DD" and disappear after that day (UTC).
+  // data-until="YYYY-MM-DD" hides it after that day
   function expireOffers() {
     const today = new Date().toISOString().slice(0, 10);
     document.querySelectorAll("[data-until]").forEach((el) => {
@@ -955,8 +923,7 @@
     });
   }
 
-  // Recent supporters row (store hub). purchases/recent.json is written by
-  // scripts/sync-purchases.mjs; demo mode shows example names. Hidden when there's nobody.
+  // recent supporters
   async function renderRecent() {
     const list = $("recent-buyers");
     if (!list) return;

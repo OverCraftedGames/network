@@ -1,8 +1,4 @@
-// Local preview server that serves clean URLs the way GitHub Pages does: /vote serves
-// vote.html, / serves index.html. No dependencies.
-//
-//   node scripts/serve.mjs            (http://127.0.0.1:8020)
-//   node scripts/serve.mjs 8030
+// local preview with clean urls: node scripts/serve.mjs [port]
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { dirname, extname, join, normalize, sep } from "node:path";
@@ -21,7 +17,6 @@ async function isFile(path) {
   try { return (await stat(path)).isFile(); } catch { return false; }
 }
 
-// Maps a request path to a file inside ROOT, or null.
 async function resolve(urlPath) {
   let rel;
   try { rel = decodeURIComponent(urlPath.split("?")[0]); } catch { return null; }

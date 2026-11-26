@@ -1,6 +1,4 @@
-// Shared page chrome: header, store bar, footer, basket drawer, dialogs, toast and the icon
-// sprite. Runs before store.js (both deferred, in order) so every page gets the same layout.
-// A page sets data-page (its nav key) and data-area="store" for pages in the store area.
+// header, footer, basket drawer, dialogs
 (() => {
   "use strict";
 

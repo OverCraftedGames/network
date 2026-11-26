@@ -1,17 +1,6 @@
-// Writes the most recent voters on each server to votes/recent.json for the vote page feed.
-// Runs in GitHub Actions on a schedule (.github/workflows/sync-votes.yml), or by hand:
-//
-//   npm install --no-save mysql2@3.11.0
-//   node --env-file=.env scripts/sync-votes.mjs
-//
-// Reads VotingPlugin's MySQL users table. Each server with a vote database has one secret:
-//   VOTES_DB_SURVIVAL   mysql://user:password@host:3306/database   (URL-encode the password)
-//   VOTES_DB_SKYBLOCK   same, once Skyblock has VotingPlugin
-// Optional: VOTES_TABLE_<SERVER> if the table isn't VotingPlugin_Users (a Prefix in Config.yml).
-// A server without a secret keeps whatever the file already has for it.
-//
-// Only the player name, UUID, latest vote time and how many sites they voted on that day are
-// written out. Each player appears once, newest vote first.
+// recent voters -> votes/recent.json
+// npm i --no-save mysql2@3.11.0 && node --env-file=.env scripts/sync-votes.mjs
+// VOTES_DB_<SERVER>=mysql://user:pass@host:3306/db, optional VOTES_TABLE_<SERVER>
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -23,8 +12,7 @@ const SERVERS = ["survival", "skyblock"];
 const LIMIT = 12;
 const DAY = 24 * 3600 * 1000;
 
-// VotingPlugin keeps LastVotes as "SiteKey//epochMillis" entries joined by "%".
-// Accept "," too, in case a version joins them differently.
+// LastVotes: "SiteKey//epochMillis" joined by "%" (or ",")
 function parseLastVotes(raw) {
   return String(raw || "")
     .split(/[%,]/)
@@ -51,8 +39,7 @@ async function votersFor(id) {
       const votes = parseLastVotes(row.LastVotes);
       if (!name || !votes.length) continue;
       const latest = Math.max(...votes.map((v) => v.at));
-      // Sites voted in the 24 hours up to their latest vote. Measured from that vote, not from
-      // now, so the number only changes when they vote again (and the file stays put between runs).
+      // sites voted in the 24h before their latest vote
       const sites = new Set(votes.filter((v) => v.at > latest - DAY).map((v) => v.site)).size;
       voters.push({
         name,

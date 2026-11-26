@@ -1,10 +1,5 @@
-// Network content that lives on the site, not in Tebex: servers, what each OCG+ tier
-// gives, rank perks and what Credits buy. Prices always come from Tebex.
-//
-// Matching to Tebex is by ORDER: the first tier/rank here pairs with the first package
-// (lowest "order") in its Tebex category, and so on. Keep both lists in the same order.
-//
-// Everything marked PLACEHOLDER is example content until the real values are decided.
+// Servers, tiers, perks. Prices come from Tebex.
+// Keep the order the same as the Tebex packages.
 window.NETWORK = {
   servers: [
     {
@@ -29,12 +24,7 @@ window.NETWORK = {
     }
   ],
 
-  // OCG+ monthly tiers, cheapest first ($5 / $10 / $20).
-  // Perks carried over from Carbon+ I / II / III (2026-11-22). Renews every 30 days, stacks with
-  // any rank or works on its own, rewards pay once per billing period. Every tier can also be
-  // bought in game for Credits (500 / 1,000 / 2,000 per 4 weeks, Survival coin shop).
-  // Keys are named by tier (T1 to T4), not crate name, because each server names its crates differently.
-  // Badge: one bolt by the name in chat and tab, coloured by tier: yellow (Charged), pink (Overcharged), teal (Supercharged).
+  // OCG+ tiers, cheapest first
   plus: [
     {
       name: "Charged",
@@ -78,20 +68,14 @@ window.NETWORK = {
     }
   ],
 
-  // Permanent ranks are network-wide: one purchase, one ladder, valid on every server.
-  // Only the perks differ per server. "ladder" is in Tebex order (cheapest first);
-  // "perks.network" applies everywhere, the other keys are per server (matching servers[].id).
-  // A perk value is shown as written; true shows a tick, false or "" shows a dash.
-  // Ladder locked 2026-11-21: Glow, Shine, Dazzle, Prism, Radiant (LuckPerms groups glow to radiant).
-  // Colours match the neon rank tags in game. Prices ($10 / $25 / $50 / $100 / $150) and the
-  // perks below are still PLACEHOLDER.
+  // Ranks (network-wide), same order as Tebex
+  // TODO: final prices + perks
   ranks: {
     ladder: [
       { name: "Glow", color: "#C6FF4D" },
       { name: "Shine", color: "#4DF0FF" },
       { name: "Dazzle", color: "#9D5CFF" },
       { name: "Prism", color: "#FF8A3D" },
-      // Top rank. Carbon+ Lifetime holders are moved to this rank (see README, Going live).
       { name: "Radiant", color: "#FF4DB8" }
     ],
     perks: {
@@ -103,7 +87,7 @@ window.NETWORK = {
           ["Rank role in Discord", [true, true, true, true, true]]
         ]}
       ],
-      // Radiant must cover everything Carbon+ Lifetime gave (Lifetime holders move to it).
+      // covers the old Carbon+ Lifetime perks
       survival: [
         { title: "Limits", perks: [
           ["Homes", ["5", "8", "10", "15", "20"]],
@@ -144,7 +128,7 @@ window.NETWORK = {
     }
   },
 
-  // What Credits buy on each server. PLACEHOLDER for Skyblock.
+  // TODO: skyblock
   creditUses: {
     survival: [
       "Chat tags and join messages",
@@ -159,9 +143,7 @@ window.NETWORK = {
     ]
   },
 
-  // Meet the Staff page (staff.html). Groups show in this order. `name` is the Minecraft
-  // username (the face comes from it); `servers` are server ids from the list above.
-  // Add an optional `bio: "..."` to anyone.
+  // staff page
   staff: [
     {
       role: "Owners", title: "Owner", key: "owner",
@@ -199,7 +181,7 @@ window.NETWORK = {
   ]
 };
 
-// Small inline art, shared by the pages.
+// icons
 window.NETWORK_ART = {
   survival: `<svg viewBox="0 0 100 100" aria-hidden="true">
     <polygon points="10,30 50,50 50,92 10,72" fill="#7a4f2a"/>
