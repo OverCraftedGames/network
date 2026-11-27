@@ -1,5 +1,13 @@
 [
   {
+    "name": "Irilven",
+    "uuid": "3821acb2bdd6422885b15a5ae2f96cf3"
+  },
+  {
+    "name": "CuriousGeorgia",
+    "uuid": "c2d9419f3104404dabd26cc90afc983a"
+  },
+  {
     "name": "qwerty16393",
     "uuid": "ed3e83460f9342d9a9cbf8af1a95b564"
   },
@@ -14,10 +22,6 @@
   {
     "name": "NolePaul",
     "uuid": "b23502de347c4fa0abea6a36557f0374"
-  },
-  {
-    "name": "CuriousGeorgia",
-    "uuid": "c2d9419f3104404dabd26cc90afc983a"
   },
   {
     "name": "steelcrafter1",
@@ -42,9 +46,5 @@
   {
     "name": "spruce_exe",
     "uuid": "81fe332276e044b486bc733c5682b182"
-  },
-  {
-    "name": "scopclaw",
-    "uuid": "5b4eaf002968493ca73a75d2b7679ca3"
   }
 ]
