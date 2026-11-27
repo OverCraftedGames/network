@@ -175,4 +175,89 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" hidden></div>`);
+
+  // Sale banner
+  const sale = cfg.sale;
+  const preview = new URLSearchParams(location.search).has("sale");
+  const ends = sale && Date.parse(sale.ends);
+  const live = sale && sale.enabled && (preview || (Date.now() >= Date.parse(sale.starts) && Date.now() < ends));
+  if (live) {
+    const show = sale.show || {};
+    const href = sale.link || "shop";
+    const when = (iso) => new Date(iso).toLocaleString(undefined,
+      { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" });
+    const clock = (unit, label) => `<span class="sale__unit"><b data-sale-${unit}>00</b><small>${label}</small></span>`;
+
+    const card = () => `
+      <section class="wrap sale-wrap">
+        <div class="sale surface">
+          <div class="sale__top">
+            <div class="sale__intro">
+              <p class="label sale__label">${sale.name}</p>
+              <h2 class="sale__title">${sale.headline}</h2>
+              <p class="sale__dates">${when(sale.starts)} → ${when(sale.ends)}</p>
+            </div>
+            <div class="sale__clock" aria-label="Time left in the sale">
+              <span class="sale__ends">Ends in</span>
+              <div class="sale__units">${clock("d", "days")}${clock("h", "hrs")}${clock("m", "min")}${clock("s", "sec")}</div>
+            </div>
+          </div>
+          <div class="sale__body">
+            <div>
+              <h3>The more you grab, the more you save</h3>
+              <ul class="sale__tiers">${(sale.tiers || []).map((t) => `
+                <li style="--tier:${t.color}"><span>Spend <b>${t.spend}+</b></span><b class="sale__off">${t.off}% off</b></li>`).join("")}
+              </ul>
+              <p class="sale__note">${sale.tiersNote || ""}</p>
+            </div>
+            ${sale.keys ? `<div class="sale__keys">
+              <h3><svg width="20" height="20" aria-hidden="true"><use href="#i-key"/></svg>${sale.keys.title}</h3>
+              <p>${sale.keys.text}</p>
+              <p>${sale.keys.claim}</p>
+            </div>` : ""}
+          </div>
+          <div class="sale__foot">
+            <p>${sale.thanks || ""}</p>
+            <a class="btn btn--sale" href="${href}">Shop the sale</a>
+          </div>
+        </div>
+      </section>`;
+
+    if (show.topbar) {
+      header.insertAdjacentHTML("beforebegin", `
+        <a class="salebar" href="${href}">
+          <span class="wrap salebar__inner">
+            <b class="salebar__name">${sale.name}</b>
+            <span class="salebar__text">${sale.headline}</span>
+            <span class="salebar__left">Ends in <b data-sale-short></b></span>
+            <span class="salebar__go">Shop now →</span>
+          </span>
+        </a>`);
+    }
+    if (show.home && page === "home") {
+      const banner = document.querySelector("main .banner");
+      if (banner) banner.insertAdjacentHTML("afterend", card());
+    }
+    if (show.store && page === "store") {
+      const main = document.querySelector("main");
+      if (main) main.insertAdjacentHTML("afterbegin", card());
+    }
+
+    const pad = (n) => String(n).padStart(2, "0");
+    const tick = () => {
+      let s = Math.max(0, Math.floor((ends - Date.now()) / 1000));
+      if (s === 0 && !preview) {
+        document.querySelectorAll(".salebar, .sale-wrap").forEach((el) => el.remove());
+        return clearInterval(timer);
+      }
+      const d = Math.floor(s / 86400); s %= 86400;
+      const h = Math.floor(s / 3600); s %= 3600;
+      const m = Math.floor(s / 60); s %= 60;
+      const set = (k, v) => document.querySelectorAll(`[data-sale-${k}]`).forEach((el) => { el.textContent = v; });
+      set("d", pad(d)); set("h", pad(h)); set("m", pad(m)); set("s", pad(s));
+      set("short", d ? `${d}d ${h}h ${pad(m)}m` : `${h}h ${pad(m)}m ${pad(s)}s`);
+    };
+    const timer = setInterval(tick, 1000);
+    tick();
+  }
 })();
