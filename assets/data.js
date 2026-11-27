@@ -133,7 +133,7 @@ window.NETWORK = {
     survival: [
       "Chat tags and join messages",
       "Crate keys and plushies",
-      "Cosmetics in the coin shop",
+      "Cosmetics in the Credit Shop",
       "Claim blocks and quality-of-life unlocks"
     ],
     skyblock: [
