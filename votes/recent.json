@@ -1,6 +1,12 @@
 {
   "survival": [
     {
+      "name": "scopclaw",
+      "uuid": "5b4eaf002968493ca73a75d2b7679ca3",
+      "at": "2026-11-28T09:19:20.426Z",
+      "sites": 7
+    },
+    {
       "name": "PlayerVin",
       "uuid": "e6c453e633ed4373ba563e705b576978",
       "at": "2026-11-28T04:18:13.462Z",
@@ -59,12 +65,6 @@
       "uuid": "d758ce8e759445d2a27a2abbba5b83ce",
       "at": "2026-11-27T09:51:50.436Z",
       "sites": 1
-    },
-    {
-      "name": "scopclaw",
-      "uuid": "5b4eaf002968493ca73a75d2b7679ca3",
-      "at": "2026-11-27T09:25:50.685Z",
-      "sites": 7
     },
     {
       "name": "warbot45",
