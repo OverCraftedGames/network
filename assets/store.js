@@ -148,9 +148,24 @@
     }).join("");
   }
 
+  // the buyer's own line for a package (gifts are separate lines)
+  function basketLine(pkgId) {
+    return (basket && basket.packages && basket.packages.find((p) =>
+      String(p.id) === String(pkgId) && !(p.in_basket && p.in_basket.gift_username))) || null;
+  }
+
   function inBasket(pkgId) {
-    return !!(basket && basket.packages && basket.packages.some((p) =>
-      String(p.id) === String(pkgId) && !(p.in_basket && p.in_basket.gift_username)));
+    return !!basketLine(pkgId);
+  }
+
+  const lineQty = (line) => (line && line.in_basket && line.in_basket.quantity) || 1;
+
+  // more than one allowed unless it's a subscription or "disable quantity" is ticked in Tebex
+  const stackable = (p) => !!p && p.type !== "subscription" && !p.disable_quantity;
+
+  function addLabel(p, label) {
+    if (!inBasket(p.id)) return esc(label || "Add to basket");
+    return stackable(p) ? "Add another" : "In basket ✓";
   }
 
   function cardHtml(p) {
@@ -169,7 +184,7 @@
           <div class="card__foot">
             ${priceHtml(p)}
             <button class="btn btn--block add${owned ? " in-basket" : ""}" type="button" data-add="${p.id}">
-              ${owned ? "In basket ✓" : "Add to basket"}
+              ${addLabel(p)}
             </button>
           </div>
         </div>
@@ -271,7 +286,7 @@
     if (!p) return `<button class="btn btn--block btn--ghost" type="button" disabled>Coming soon</button>`;
     const owned = inBasket(p.id);
     return `<button class="btn btn--block add${owned ? " in-basket" : ""}${extraClass ? " " + extraClass : ""}" type="button" data-add="${p.id}">` +
-      `${owned ? "In basket ✓" : esc(label || "Add to basket")}</button>`;
+      `${addLabel(p, label)}</button>`;
   }
 
   const icon = (name, size) => `<svg width="${size || 20}" height="${size || 20}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
@@ -469,7 +484,6 @@
   function showDetails(pkgId) {
     const p = packages.get(String(pkgId));
     if (!p) return;
-    const owned = inBasket(p.id);
     const name = splitName(p.name);
     const desc = p.description || (demo
       ? "<p>Demo listing. The live store shows the description written in the Tebex panel.</p>"
@@ -482,7 +496,7 @@
         ${priceHtml(p)}
         <div class="desc">${desc}</div>
         <div class="pkg-detail__actions">
-          <button class="btn" type="button" data-add="${p.id}">${owned ? "In basket ✓" : "Add to basket"}</button>
+          <button class="btn" type="button" data-add="${p.id}">${addLabel(p)}</button>
           <button class="btn btn--ghost" type="button" data-close-modal>Close</button>
         </div>
         ${giftable(p) ? `
@@ -608,8 +622,15 @@
   }
 
   async function addPackage(pkgId, giftTo) {
-    if (!giftTo && inBasket(pkgId)) { openBasket(); return; }
     const p = packages.get(String(pkgId));
+    if (!giftTo && inBasket(pkgId)) {
+      if (!stackable(p)) { openBasket(); return; }
+      if (await setQuantity(pkgId, lineQty(basketLine(pkgId)) + 1)) {
+        if (els.pkgModal.open) els.pkgModal.close();
+        toast("Another " + p.name + " added to your basket.");
+      }
+      return;
+    }
     if (!p || busy) return;
     busy = true;
     try {
@@ -656,6 +677,36 @@
       }
     } catch (e) {
       await handleError(e);
+    } finally {
+      busy = false;
+    }
+  }
+
+  // returns true when the basket was updated
+  async function setQuantity(pkgId, quantity) {
+    if (quantity < 1) { await removePackage(pkgId); return true; }
+    const line = basketLine(pkgId);
+    if (!basket || !line || busy) return false;
+    busy = true;
+    try {
+      if (demo) {
+        line.in_basket.quantity = quantity;
+        basket.total_price = basket.packages.reduce((sum, x) => sum + x.in_basket.price * x.in_basket.quantity, 0);
+        setBasket(basket);
+      } else {
+        const known = packages.get(String(pkgId));
+        await api("/baskets/" + encodeURIComponent(basket.ident) + "/packages/" +
+          encodeURIComponent(String((known && known.ident) || pkgId)), {
+          method: "PUT",
+          body: { quantity }
+        });
+        const json = await api(account("/baskets/" + encodeURIComponent(basket.ident)));
+        setBasket(json.data);
+      }
+      return true;
+    } catch (e) {
+      await handleError(e);
+      return false;
     } finally {
       busy = false;
     }
@@ -731,12 +782,18 @@
         const qty = (x.in_basket && x.in_basket.quantity) || 1;
         const price = x.in_basket ? x.in_basket.price : (known ? known.total_price : 0);
         const giftFor = x.in_basket && x.in_basket.gift_username;
+        const stepper = !giftFor && stackable(known) ? `
+              <div class="qty" role="group" aria-label="Quantity of ${esc(x.name)}">
+                <button type="button" data-qty="${x.id}" data-step="-1" aria-label="One fewer">−</button>
+                <span>${qty}</span>
+                <button type="button" data-qty="${x.id}" data-step="1" aria-label="One more">+</button>
+              </div>` : "";
         return `
           <li class="line">
             ${image ? `<img src="${esc(image)}" alt="">` : "<span></span>"}
             <div>
               <div class="line__name">${esc(x.name)}</div>
-              <div class="line__meta">${qty > 1 ? qty + " × " : ""}${money(price, basket.currency)}${giftFor ? ` · gift for ${esc(giftFor)}` : ""}</div>
+              <div class="line__meta">${qty > 1 && !stepper ? qty + " × " : ""}${money(price, basket.currency)}${giftFor ? ` · gift for ${esc(giftFor)}` : ""}</div>${stepper}
             </div>
             <button class="line__remove" type="button" data-remove="${x.id}">Remove</button>
           </li>`;
@@ -802,9 +859,12 @@
       toggle.textContent = folded ? "Show everything included" : "Show less";
       return;
     }
-    const target = event.target.closest("[data-add],[data-remove],[data-details],[data-slug],[data-close-modal]");
+    const target = event.target.closest("[data-add],[data-qty],[data-remove],[data-details],[data-slug],[data-close-modal]");
     if (!target) return;
     if (target.dataset.add) addPackage(target.dataset.add);
+    else if (target.dataset.qty) {
+      setQuantity(target.dataset.qty, lineQty(basketLine(target.dataset.qty)) + Number(target.dataset.step));
+    }
     else if (target.dataset.remove) removePackage(target.dataset.remove);
     else if (target.dataset.details) showDetails(target.dataset.details);
     else if (target.dataset.slug) selectCategory(target.dataset.slug);
@@ -942,11 +1002,37 @@
     } catch (e) { /* the row is optional */ }
   }
 
+  // this month's top supporter (purchases/top.json, written by the purchase sync)
+  async function renderTopSupporter() {
+    const box = $("top-supporter");
+    if (!box) return;
+    try {
+      const res = await fetch(demo ? "assets/demo-top.json" : "purchases/top.json", { cache: "no-cache" });
+      if (!res.ok) return;
+      const top = await res.json();
+      const thisMonth = new Date().toISOString().slice(0, 7);
+      // a stale file from last month means the sync hasn't caught up yet
+      if (!top || !top.name || (!demo && top.month !== thisMonth)) return;
+      const [y, m] = String(top.month || thisMonth).split("-").map(Number);
+      const monthName = new Date(Date.UTC(y, m - 1, 1)).toLocaleString("en-US", { month: "long", timeZone: "UTC" });
+      box.innerHTML = `
+        <img src="https://mc-heads.net/avatar/${encodeURIComponent(top.uuid || top.name)}/64" alt="" width="52" height="52"
+          onerror="this.onerror=null;this.src='https://mc-heads.net/avatar/MHF_Steve/64'">
+        <div class="top-supporter__text">
+          <p class="label">Top supporter · ${esc(monthName)}</p>
+          <strong>${esc(top.name)}</strong>
+        </div>
+        <span class="top-supporter__crown">${icon("crown", 26)}</span>`;
+      box.hidden = false;
+    } catch (e) { /* optional */ }
+  }
+
   async function start() {
     renderPlayer();
     renderServers();
     renderCreditUses();
     renderRecent();
+    renderTopSupporter();
     expireOffers();
     reveal();
     loadStatus();

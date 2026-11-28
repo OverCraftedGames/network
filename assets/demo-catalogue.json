@@ -212,7 +212,7 @@
           "total_price": 4.99,
           "currency": "USD",
           "discount": 0,
-          "disable_quantity": true,
+          "disable_quantity": false,
           "disable_gifting": false,
           "order": 0
         },
@@ -231,7 +231,7 @@
           "total_price": 9.99,
           "currency": "USD",
           "discount": 0,
-          "disable_quantity": true,
+          "disable_quantity": false,
           "disable_gifting": false,
           "order": 1
         },
@@ -250,7 +250,7 @@
           "total_price": 19.99,
           "currency": "USD",
           "discount": 0,
-          "disable_quantity": true,
+          "disable_quantity": false,
           "disable_gifting": false,
           "order": 2
         },
@@ -269,7 +269,7 @@
           "total_price": 49.99,
           "currency": "USD",
           "discount": 0,
-          "disable_quantity": true,
+          "disable_quantity": false,
           "disable_gifting": false,
           "order": 3
         },
@@ -288,7 +288,7 @@
           "total_price": 99.99,
           "currency": "USD",
           "discount": 0,
-          "disable_quantity": true,
+          "disable_quantity": false,
           "disable_gifting": false,
           "order": 4
         }
